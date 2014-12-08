@@ -29,7 +29,28 @@ class Textbox(Widget_):
 	def set_setting(self):
 		return
 
+	def OnValidate(self, d, i, P, s, S, v, V, W, string):
+
+		return
+
 	def set_input_restriction(self, string):
+		def OnValidate(self, d, i, P, s, S, v, V, W, string):
+			if d == 0:
+				return True
+			accepted_inputs = string.split(',')
+			if 'int' in accepted_inputs and S.isdigit():
+				return True
+			if 'lower' in accepted_inputs:
+				S = S.lower()
+				return True
+			if 'upper' in accepted_inputs:
+				S = S.upper()
+				return True
+			return False
+
+		self.vcmd = self.widget_frame.register(OnValidate), '%d', '%i', '%P', '%s', '%S', '%v', '%V', '%W', string
 		return
 
 	pass
+
+print(int == eval('int'))
