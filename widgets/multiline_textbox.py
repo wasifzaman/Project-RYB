@@ -1,6 +1,6 @@
 '''
 '''
-from class_textbox_widget import Textbox
+from textbox_widget import Textbox
 from tkinter.scrolledtext import ScrolledText
 from tkinter import END
 

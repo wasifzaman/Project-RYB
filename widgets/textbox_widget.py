@@ -1,6 +1,6 @@
 '''
 '''
-from class_widget import Widget_
+from widget_ import Widget_
 from tkinter import Frame, Label, Entry, StringVar, LEFT
 
 class Textbox(Widget_):
@@ -49,6 +49,7 @@ class Textbox(Widget_):
 			return False
 
 		self.vcmd = self.widget_frame.register(OnValidate), '%d', '%i', '%P', '%s', '%S', '%v', '%V', '%W', string
+		self.entry.config(validate="all", validatecommand=self.vcmd)
 		return
 
 	pass

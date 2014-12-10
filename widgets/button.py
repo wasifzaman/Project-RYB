@@ -1,6 +1,6 @@
 '''
 '''
-from class_widget import Widget_
+from widget_ import Widget_
 from tkinter import Label
 
 class Button_(Widget_):
