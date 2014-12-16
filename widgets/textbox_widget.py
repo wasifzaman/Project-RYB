@@ -29,10 +29,6 @@ class Textbox(Widget_):
 	def set_setting(self):
 		return
 
-	def OnValidate(self, d, i, P, s, S, v, V, W, string):
-
-		return
-
 	def set_input_restriction(self, string):
 		def OnValidate(self, d, i, P, s, S, v, V, W, string):
 			if d == 0:
