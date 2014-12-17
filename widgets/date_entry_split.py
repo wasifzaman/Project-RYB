@@ -9,7 +9,8 @@ class Date_entry(Widget_):
 		Widget_.__init__(self, parent_frame, x, y)
 		self.label_width = 20
 		self.mdy_frame = 30
-		self.entry_width = 10
+		self.entry_width = 9
+		self.dash_width = 1
 		self.month_stringvar = StringVar()
 		self.date_stringvar = StringVar()
 		self.year_stringvar = StringVar()
@@ -18,8 +19,8 @@ class Date_entry(Widget_):
 		self.month_entry = Entry(self.mdy_frame, width=self.entry_width, textvariable=self.month_stringvar, bd=0, justify=CENTER)
 		self.day_entry = Entry(self.mdy_frame, width=self.entry_width, textvariable=self.date_stringvar, bd=0, justify=CENTER)
 		self.year_entry = Entry(self.mdy_frame, width=self.entry_width, textvariable=self.year_stringvar, bd=0, justify=CENTER)
-		self.dash_one = Label(self.mdy_frame, text='/', bg='white')
-		self.dash_two = Label(self.mdy_frame, text='/', bg='white')
+		self.dash_one = Label(self.mdy_frame, text='/', bg='white', width=self.dash_width)
+		self.dash_two = Label(self.mdy_frame, text='/', bg='white', width=self.dash_width)
 		self.label.pack(side=LEFT)
 		self.mdy_frame.pack(side=LEFT)
 		self.month_entry.pack(side=LEFT)
@@ -83,6 +84,12 @@ d.set_text_field(date='10/07/1988')
 b = Button(f, text='abcd')
 b.place(x=50, y=50)
 b.config(command=lambda: print(d.get_info()))
+
+d.month_entry.config(font='11')
+d.day_entry.config(font='11')
+d.year_entry.config(font='11')
+d.dash_one.config(font='11')
+d.dash_two.config(font='11')
 
 t.mainloop()
 

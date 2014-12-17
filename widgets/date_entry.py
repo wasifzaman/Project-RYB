@@ -7,18 +7,21 @@ class Date_entry(Textbox):
 
 	def __init__(self, parent_frame, x, y):
 		Textbox.__init__(self, parent_frame, x, y)
-
 		def var_change(*args):
 			def OnValidate(d, i, P, s, S, v, V, W):
 				if d == 0: return True
-				if len(s) == 10: return False
-				if S == '/': return True
+				elif len(s) == 10: return False
+				elif S == '/': return True
 				elif not S.isdigit():
 					return False
 				return True
 
 			self.entry.config(validate="key", validatecommand=(self.widget_frame.register(OnValidate),
 				'%d', '%i', '%P', '%s', '%S', '%v', '%V', '%W'))
+
+			if self.key_press == 'BackSpace' or self.key_press == 'Delete':
+				self.key_press = None
+				return
 
 			if len(self.stringvar.get()) == 1 and (not self.stringvar.get().isdigit()):
 				self.stringvar.set('')
@@ -27,7 +30,14 @@ class Date_entry(Textbox):
 			elif len(self.stringvar.get()) == 5:
 				self.entry.insert(5, '/')
 			return
+
+		def key_pressed(key):
+			self.key_press = key
+
+		self.key_press = None
 		self.stringvar.trace('w', var_change)
+		self.entry.bind('<BackSpace>', lambda event: key_pressed('BackSpace'))
+		self.entry.bind('<Delete>', lambda event: key_pressed('Delete'))
 
 	def set_input_restriction(self):
 		return
