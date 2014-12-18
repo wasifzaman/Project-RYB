@@ -54,7 +54,6 @@ class Date_entry(Widget_):
 				return True
 			return False
 
-
 		self.month_entry.config(validate="all", validatecommand=(self.mdy_frame.register(OnValidate), '%d', '%i', '%P', '%s', '%S', '%v', '%V', '%W', 'month'))
 		self.day_entry.config(validate="all", validatecommand=(self.mdy_frame.register(OnValidate), '%d', '%i', '%P', '%s', '%S', '%v', '%V', '%W', 'day'))
 		self.year_entry.config(validate="all", validatecommand=(self.mdy_frame.register(OnValidate), '%d', '%i', '%P', '%s', '%S', '%v', '%V', '%W', 'year'))
