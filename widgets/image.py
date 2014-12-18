@@ -2,8 +2,9 @@
 '''
 from widget_ import Widget_
 from tkinter import Label
+from PIL import Image, ImageTk
 
-class Button_(Widget_):
+class Image_(Widget_):
 
 	def __init__(self, parent_frame, x, y):
 		Widget_.__init__(self, parent_frame, x, y)
@@ -21,8 +22,10 @@ class Button_(Widget_):
 			self.label.config(bg=kwargs['label_bg'])
 		if 'label_fg' in kwargs:
 			self.label.config(fg=kwargs['label_fg'])
-		if 'text' in kwargs:
-			self.label.config(text=kwargs['text'])
-		if 'font' in kwargs:
-			self.label.config(font=kwargs['font'])
+		if 'image' in kwargs:
+			self.picture = Image.open(kwargs['image'])
+			self.image = ImageTk.PhotoImage(self.picture)
+			self.label.config(image=self.image)
+		if 'resize' in kwargs:
+			self.picture.resize(kwargs['resize'], Image.ANTIALIAS)
 		return

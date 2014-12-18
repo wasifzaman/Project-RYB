@@ -4,15 +4,15 @@ from tkinter import Frame
 
 class Widget_:
 
-	def __init__(self, parent_frame, row, column, width=50, height=50):
+	def __init__(self, parent_frame, x, y, width=50, height=50):
 		self.widget_frame = Frame(parent_frame, width=width, height=height)
-		self.widget_frame.grid(row=row, column=column)
-		self.width, self.height = width, height
+		self.widget_frame.place(x=x, y=y)
+		self.x, self.y, self.width, self.height = x, y, width, height
 		self.tags = []
 		return
 
 	def add_tag(self, string):
-		self.tags.append(string)
+		self.tag.append(string)
 		return
 
 	def resize(self, new_width, new_height):
@@ -25,6 +25,10 @@ class Widget_:
 
 	def hide_widget(self):
 		self.widget_frame.place_forget()
+		return
+
+	def show_widget(self, new_x, new_y):
+		self.widget_frame.place(x=new_x, y=new_y)
 		return
 
 	def get_info(self):

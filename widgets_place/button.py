@@ -14,15 +14,8 @@ class Button_(Widget_):
 	def get_info(self):
 		return self.label.cget('text')
 
-	def settings(self, **kwargs):
-		''' all setting changes '''
-		
-		if 'label_bg' in kwargs:
-			self.label.config(bg=kwargs['label_bg'])
-		if 'label_fg' in kwargs:
-			self.label.config(fg=kwargs['label_fg'])
-		if 'text' in kwargs:
-			self.label.config(text=kwargs['text'])
-		if 'font' in kwargs:
-			self.label.config(font=kwargs['font'])
+	def set_text_field(self, label):
+		self.label.config(text=label)
+
+	def set_settings(self):
 		return
