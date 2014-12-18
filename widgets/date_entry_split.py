@@ -32,7 +32,14 @@ class Date_entry(Widget_):
 		self.entry_bg, self.entry_fg, self.entry_hover_bg, self.entry_hover_fg = None, None, None, None
 
 		def OnValidate(d, i, P, s, S, v, V, W, digit_type):
-			if d == 0: return True
+			if d == '0':
+				if len(P) == 0:
+					if digit_type == 'year':
+						self.day_entry.focus_set()
+					elif digit_type == 'day':
+						self.month_entry.focus_set()
+				return True
+
 			if S.isdigit() and ( \
 					(digit_type == 'month' and len(P) > 2) or \
 					(digit_type == 'day' and len(P) > 2) or \
