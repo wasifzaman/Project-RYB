@@ -15,7 +15,7 @@ class Date_textbox(Widget_):
 		self.date_stringvar = StringVar()
 		self.year_stringvar = StringVar()
 		self.label = Label(self.widget_frame, width=self.label_width, anchor=E)
-		self.mdy_frame = Frame(self.widget_frame, width=self.mdy_frame, bg='white', relief=RIDGE, bd=1)
+		self.mdy_frame = Frame(self.widget_frame, width=self.mdy_frame, bg='white', relief=FLAT, bd=1)
 		self.month_entry = Entry(self.mdy_frame, width=self.entry_width, textvariable=self.month_stringvar, bd=0, justify=CENTER)
 		self.day_entry = Entry(self.mdy_frame, width=self.entry_width, textvariable=self.date_stringvar, bd=0, justify=CENTER)
 		self.year_entry = Entry(self.mdy_frame, width=self.entry_width + 1, textvariable=self.year_stringvar, bd=0, justify=CENTER)

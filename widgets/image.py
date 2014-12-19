@@ -27,5 +27,7 @@ class Image_(Widget_):
 			self.image = ImageTk.PhotoImage(self.picture)
 			self.label.config(image=self.image)
 		if 'resize' in kwargs:
-			self.picture.resize(kwargs['resize'], Image.ANTIALIAS)
+			self.picture = self.picture.resize(kwargs['resize'], Image.ANTIALIAS)
+			self.image = ImageTk.PhotoImage(self.picture)
+			self.label.config(image=self.image)
 		return

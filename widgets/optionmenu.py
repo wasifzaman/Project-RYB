@@ -13,7 +13,7 @@ class Optionmenu(Widget_):
 		self.options = []
 		self.stringvar = StringVar()
 		self.label = Label(self.widget_frame, width=self.label_width, anchor=E)
-		self.combobox = ttk.Combobox(self.widget_frame, textvariable=self.stringvar)
+		self.combobox = ttk.Combobox(self.widget_frame, textvariable=self.stringvar, state='readonly')
 		self.label.pack(side=LEFT, padx=3)
 		self.combobox.pack(side=LEFT)
 		self.label_bg, self.label_fg, self.label_hover_bg, self.label_hover_fg = None, None, None, None

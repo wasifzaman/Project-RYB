@@ -1,7 +1,7 @@
 '''
 '''
 from widget_ import Widget_
-from tkinter import Frame, Label, Entry, StringVar, LEFT, RIGHT, E, RIDGE
+from tkinter import Frame, Label, Entry, StringVar, LEFT, RIGHT, E, RIDGE, FLAT
 
 class Textbox(Widget_):
 
@@ -11,7 +11,7 @@ class Textbox(Widget_):
 		self.entry_width = 20
 		self.stringvar = StringVar()
 		self.label = Label(self.widget_frame, width=self.label_width, anchor=E)
-		self.entry = Entry(self.widget_frame, width=self.entry_width, textvariable=self.stringvar, relief=RIDGE)
+		self.entry = Entry(self.widget_frame, width=self.entry_width, textvariable=self.stringvar, relief=FLAT)
 		self.label.pack(side=LEFT, padx=3)
 		self.entry.pack(side=LEFT)
 		self.label_bg, self.label_fg, self.label_hover_bg, self.label_hover_fg = None, None, None, None

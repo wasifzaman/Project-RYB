@@ -2,14 +2,14 @@
 '''
 from textbox import Textbox
 from tkinter.scrolledtext import ScrolledText
-from tkinter import END, LEFT, RIDGE
+from tkinter import END, LEFT, RIDGE, FLAT
 
 class Multiline_textbox(Textbox):
 
 	def __init__(self, parent_frame, x, y):
 		Textbox.__init__(self, parent_frame, x, y)
 		self.entry.pack_forget()
-		self.entry = ScrolledText(self.widget_frame, width=self.entry_width, relief=RIDGE)
+		self.entry = ScrolledText(self.widget_frame, width=self.entry_width, relief=FLAT)
 		self.entry.pack(side=LEFT)
 
 	def get_info(self):
