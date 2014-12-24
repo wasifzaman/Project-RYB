@@ -87,7 +87,7 @@ print(all_)
 
 
 
-conn = sqlite3.connect('test.db')
+conn = sqlite3.connect('test2.db')
 
 c = conn.cursor()
 
@@ -96,7 +96,7 @@ c = conn.cursor()
  #            (first_name text, last_name text, dob date)
 #	''')
 
-#c.execute("INSERT INTO student_info VALUES ('Wasif','Zaman', '1988/10/07')")
+#c.execute("INSERT INTO student_info VALUES ('BRK-002', 'Zhen','Zhou', '1988-06-25', 26)")
 #c.execute("INSERT INTO student_info VALUES ('Aasif','Zaman', '1988/10/07')")
 #c.execute("INSERT INTO student_info VALUES ('Zasif','Zaman', '1988/10/07')")
 
