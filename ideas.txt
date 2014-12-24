@@ -1,0 +1,11 @@
+PSEUDO
+set tag to widget
+get data={tag: widget_data, tag2: widget_data, ...}
+
+1. prepare_row:
+	row = []
+	for column_name in table:
+		#column_name = tag
+		row.append(data[column_name])
+
+2. SQL: insert row into table
