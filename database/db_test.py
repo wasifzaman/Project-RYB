@@ -43,7 +43,11 @@ data = {}
 #x.create_open_database('test2.db', 'student_db_template.db')
 x.create_open_database('test2.db')
 
-x.add_student(data)
+#x.add_student(data)
+
+x.cur.execute("INSERT INTO student_info VALUES (?, ?, ?, ?, ?)", ('BRK-001', 'Zhen', 'Zhou', datetime.datetime.strptime('10/07/1988', "%m/%d/%Y"), '26'))
+
+x.conn.commit()
 
 x.conn.close()
 

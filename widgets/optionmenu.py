@@ -19,9 +19,6 @@ class Optionmenu(Widget_):
 		self.label_bg, self.label_fg, self.label_hover_bg, self.label_hover_fg = None, None, None, None
 		self.entry_bg, self.entry_fg, self.entry_hover_bg, self.entry_hover_fg = None, None, None, None
 
-	def get_info(self):
-		return self.label.cget('text'), self.entry.get()
-
 	def settings(self, **kwargs):
 		if 'label' in kwargs:
 			self.label.config(text=kwargs['label'])

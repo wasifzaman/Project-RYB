@@ -8,24 +8,18 @@ class Widget_:
 		self.widget_frame = Frame(parent_frame, width=width, height=height)
 		self.widget_frame.grid(row=row, column=column)
 		self.width, self.height = width, height
-		self.tags = []
 		return
 
-	def add_tag(self, string):
-		self.tags.append(string)
-		return
-
-	def resize(self, new_width, new_height):
-		self.widget_frame.config(width=new_width, height=new_height)
-		return
+	def add_tag(self, tag_library, string):
+		tag_library[string] = self
 
 	def delete_widget(self):
+		for child in self.widget_frame.winfo_children():
+			child.destroy()
 		self.widget_frame.destroy()
-		return
 
 	def hide_widget(self):
-		self.widget_frame.place_forget()
-		return
+		self.widget_frame.grid_forget()
 
 	def get_info(self):
 		return

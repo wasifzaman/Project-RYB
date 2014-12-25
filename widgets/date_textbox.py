@@ -58,6 +58,10 @@ class Date_textbox(Widget_):
 		self.day_entry.config(validate="all", validatecommand=(self.mdy_frame.register(OnValidate), '%d', '%i', '%P', '%s', '%S', '%v', '%V', '%W', 'day'))
 		self.year_entry.config(validate="all", validatecommand=(self.mdy_frame.register(OnValidate), '%d', '%i', '%P', '%s', '%S', '%v', '%V', '%W', 'year'))
 
+	#def get_(self):
+	#	date = self.month_entry.get() + '/' + self.day_entry.get() + '/' + self.year_entry.get()
+	#	return datetime.strptime(date, '%m/%d/%Y')
+
 	def get_info(self):
 		date = self.month_entry.get() + '/' + self.day_entry.get() + '/' + self.year_entry.get()
 		return date, datetime.strptime(date, '%m/%d/%Y')

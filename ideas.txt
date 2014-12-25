@@ -1,5 +1,5 @@
 PSEUDO
-set tag to widget
+set tag to widget, tag_list={tag: widget, tag: widget}
 get data={tag: widget_data, tag2: widget_data, ...}
 
 1. prepare_row:

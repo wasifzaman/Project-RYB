@@ -12,6 +12,9 @@ class Image_(Widget_):
 		self.label.pack()
 		self.label_bg, self.label_fg = None, None
 
+	#def get_(self):
+	#	return self.picture
+
 	def get_info(self):
 		return self.label.cget('text')
 
@@ -23,7 +26,8 @@ class Image_(Widget_):
 		if 'label_fg' in kwargs:
 			self.label.config(fg=kwargs['label_fg'])
 		if 'image' in kwargs:
-			self.picture = Image.open(kwargs['image'])
+			self.img_path = kwargs['image']
+			self.picture = Image.open(self.img_path)
 			self.image = ImageTk.PhotoImage(self.picture)
 			self.label.config(image=self.image)
 		if 'resize' in kwargs:

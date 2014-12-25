@@ -12,6 +12,9 @@ class Multiline_textbox(Textbox):
 		self.entry = ScrolledText(self.widget_frame, width=self.entry_width, relief=FLAT)
 		self.entry.pack(side=LEFT)
 
+	#def get_(self):
+	#	return self.entry.get('1.0', END+'-1c')
+
 	def get_info(self):
 		return self.label.cget('text'), self.entry.get('1.0', END+'-1c')
 
