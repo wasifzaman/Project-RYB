@@ -16,12 +16,22 @@ class Database_editor:
 		self.cur = self.conn.cursor()
 
 	def add_student(self, data_table):
-		print([row[1] for row in self.cur.execute('PRAGMA table_info(student_info)')])
+		table_columns = {
+			#names of table columns
+			'student_info': [row[1] for row in self.cur.execute('PRAGMA table_info(student_info)')]
+		}
 
-		#[row for row in self.cur.execute('''
-		#	SELECT table_name
-		#	FROM USER_TAB_COLUMNS WHERE table_name=?''', ('student_info', ))]
-		return
+		for table_name, table_columns_ in table_columns.items():
+			'''
+			table_values = create a list ordered by columns from table_columns
+			value_fill = (?, ?, ..) tuple converted to string for script
+			'''
+			table_values = tuple([data_table[column_name] for column_name in table_columns_])
+			value_fill = str(tuple(['?' for i in table_columns[table_name]])).replace("'", '')
+			script = 'INSERT INTO ' + table_name + ' VALUES ' + value_fill
+
+			self.cur.execute(script, table_values)
+			self.conn.commit()
 
 	def get_timeslot(self):
 		return
@@ -34,22 +44,24 @@ class Database_editor:
 
 
 
-x = Database_editor()
+#x = Database_editor()
 
 
 #x.create_database('test.db')
-data = {}
+#data = {}
 
 #x.create_open_database('test2.db', 'student_db_template.db')
-x.create_open_database('test2.db')
+#x.create_open_database('test2.db')
 
 #x.add_student(data)
 
-x.cur.execute("INSERT INTO student_info VALUES (?, ?, ?, ?, ?)", ('BRK-001', 'Zhen', 'Zhou', datetime.datetime.strptime('10/07/1988', "%m/%d/%Y"), '26'))
+#x.cur.execute("INSERT INTO student_info VALUES (?, ?, ?, ?, ?)", ('BRK-002', 'Zhen', 'Zhou', datetime.datetime.strptime('10/07/1988', "%m/%d/%Y"), '26'))
+#'%Y-%m-%d %H:%M:%S'
 
-x.conn.commit()
 
-x.conn.close()
+#x.conn.commit()
+
+#x.conn.close()
 
 #conn = sqlite3.connect('test2.db')
 

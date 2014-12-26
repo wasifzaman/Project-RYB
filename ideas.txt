@@ -9,3 +9,7 @@ get data={tag: widget_data, tag2: widget_data, ...}
 		row.append(data[column_name])
 
 2. SQL: insert row into table
+
+
+Card printed should be date
+ttk.Notebook padding

@@ -15,7 +15,9 @@ class Textbox(Widget_):
 		self.label.pack(side=LEFT, padx=3)
 		self.entry.pack(side=LEFT)
 		self.label_bg, self.label_fg, self.label_hover_bg, self.label_hover_fg = None, None, None, None
-		self.entry_bg, self.entry_fg, self.entry_hover_bg, self.entry_hover_fg = None, None, None, None
+		self.entry_bg, self.entry_fg, self.entry_focus_bg, self.entry_focus_fg = '#FFFFFF', None, '#D0F2ED', None
+		self.widget_frame.bind('<FocusIn>', lambda event: self.entry.config(bg=self.entry_focus_bg))
+		self.widget_frame.bind('<FocusOut>', lambda event: self.entry.config(bg=self.entry_bg))
 
 	#def get_(self):
 	#	return self.entry.get()
