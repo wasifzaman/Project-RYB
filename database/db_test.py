@@ -11,10 +11,6 @@ class Database_editor:
 		self.conn = sqlite3.connect(db_filepath)
 		self.cur = self.conn.cursor()
 
-	def open_database(self, db_filepath):
-		self.conn = sqlite3.connect(db_filepath)
-		self.cur = self.conn.cursor()
-
 	def add_student(self, data_table):
 		table_columns = {
 			#names of table columns
