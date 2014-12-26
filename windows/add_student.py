@@ -10,7 +10,6 @@ import textbox
 import date_textbox
 import multiline_textbox
 import optionmenu
-import add_widget_get_
 import tkinter.ttk
 
 ''' root window '''

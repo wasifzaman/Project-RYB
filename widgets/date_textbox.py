@@ -70,8 +70,10 @@ class Date_textbox(Widget_):
 		if 'label' in kwargs:
 			self.label.config(text=kwargs['label'])
 		elif 'date' in kwargs:
-			date = kwargs['date'].split('/')
-			m, d, y = date[0], date[1], date[2]
+			#expects a full datetime string entry ex: 2014-12-31 00:00:00
+			print(kwargs['date'][:10])
+			date = kwargs['date'][:10].split('-')
+			y, m, d = date[0], date[1], date[2]
 			self.month_entry.delete(0, END)
 			self.day_entry.delete(0, END)
 			self.year_entry.delete(0, END)

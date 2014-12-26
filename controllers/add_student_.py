@@ -5,6 +5,8 @@ sys.path.append(os.path.abspath(os.pardir) + '\database') #windows directory
 
 import db_test
 from add_student import *
+import add_widget_get_
+import add_widget_set
 
 ''' tag library '''
 '''
@@ -51,6 +53,22 @@ def add_student_():
 	data = get_data_from_lib('student_data')
 	db_editor.add_student(data)
 
-Button(add_student, text='Add Student', command=add_student_).pack()
+''' temp '''
+''' fetch data '''
+def fetch_student():
+	db_editor = db_test.Database_editor()
+	db_editor.create_open_database(config['DEFAULT']['DBFILEPATH'])
+
+	data = db_editor.fetch_data('BRK-001')
+	for widget_name, widget in student_data.items():
+		if widget_name in data:
+			#remove this if statement, solidify code
+			widget.set(data[widget_name])
+
+	return
+
+
+#Button(add_student, text='Add Student', command=add_student_).pack()
+Button(add_student, text='Fetch Student', command=fetch_student).pack()
 
 add_student.mainloop()

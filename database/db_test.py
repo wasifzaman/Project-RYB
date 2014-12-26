@@ -29,6 +29,21 @@ class Database_editor:
 			self.cur.execute(script, table_values)
 			self.conn.commit()
 
+	def fetch_data(self, id):
+		'''
+		add data from table by id
+		match column name and data by
+			{column_name: column_data for (column_name, column_data) in zip(table, table_data by id)}
+		'''
+		data = {}
+		data.update({
+			column: column_data for (column, column_data) in \
+			zip([row[1] for row in self.cur.execute('PRAGMA table_info(student_info)')], \
+				[row for row in self.cur.execute('SELECT * FROM student_info WHERE id=?', (id, ))][0])
+			})
+
+		return data
+
 	def get_timeslot(self):
 		return
 
