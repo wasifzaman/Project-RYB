@@ -13,7 +13,7 @@ import optionmenu
 import tkinter.ttk
 
 ''' root window '''
-add_student = Tk()
+add_student = Toplevel()
 add_student.option_add('*Label.Font', 'Helvetica 11')
 add_student.option_add('*Entry.Font', 'Helvetica 11')
 

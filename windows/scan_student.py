@@ -129,4 +129,4 @@ search_type.label.config(width=2)
 
 ''' set fill tags '''
 
-edit_student.mainloop()
+#edit_student.mainloop()

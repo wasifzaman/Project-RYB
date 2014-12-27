@@ -47,4 +47,4 @@ search_type.label.config(width=2)
 
 ''' set fill tags '''
 
-student_list.mainloop()
+#student_list.mainloop()

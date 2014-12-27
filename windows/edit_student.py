@@ -130,4 +130,4 @@ cell_phone_2.set_input_restriction('int')
 
 ''' set fill tags '''
 
-edit_student.mainloop()
+#edit_student.mainloop()

@@ -1,5 +1,6 @@
 '''
 '''
+from tkinter import *
 from widget_ import Widget_
 from datetime import datetime
 
@@ -83,7 +84,7 @@ class Date_textbox(Widget_):
 
 	pass
 
-from tkinter import *
+
 
 '''
 t = Tk()

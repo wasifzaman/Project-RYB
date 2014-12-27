@@ -42,22 +42,6 @@ class Date_entry(Textbox):
 	def set_input_restriction(self):
 		return
 
-from tkinter import *
-
-
-t = Tk()
-f = Frame(width=500, height=500)
-f.pack()
-
-d = Date_entry(f, 0, 0)
-d.set_text_field(entry='10/07/1988')
-
-b = Button(f, text='abcd')
-b.place(x=50, y=50)
-b.config(command=lambda: print(d.get_info()))
-
-t.mainloop()
-
 
 '''
 date_entry example

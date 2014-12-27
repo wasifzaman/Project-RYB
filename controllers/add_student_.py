@@ -40,11 +40,6 @@ zipcode.add_tag(student_data, 'zipcode')
 
 notes_.add_tag(student_data, 'notes')
 
-''' config file '''
-config = configparser.ConfigParser()
-config.read('config.ini')
-print(config['DEFAULT']['DBFILEPATH'])
-
 ''' data '''
 def get_data_from_lib(lib_name):
 	return {col_name: value.get_() for col_name, value in eval(lib_name).items()}
@@ -74,4 +69,4 @@ def fetch_student():
 Button(add_student, text='Add Student', command=add_student_).pack()
 #Button(add_student, text='Fetch Student', command=fetch_student).pack()
 
-add_student.mainloop()
+#add_student.mainloop()
