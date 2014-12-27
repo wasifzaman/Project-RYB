@@ -64,9 +64,6 @@ change_lang.widget_frame.grid(pady=(0, 1))
 print_report.widget_frame.grid(pady=(0, 1))
 exit.widget_frame.grid(pady=(0, 1))
 
-''' config file '''
-config = configparser.ConfigParser()
-config.read(controllers + 'config.ini')
-print(config['DEFAULT']['DBFILEPATH'])
+add_student.settings(command=add_student_.start_window)
 
 root.mainloop()

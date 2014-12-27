@@ -39,5 +39,5 @@ class Button_(Widget_):
 			self.label.bind('<Enter>', lambda event: self.label.config(fg=self.hover_fg, bg=self.hover_bg))
 			self.label.bind('<Leave>', lambda event: self.label.config(fg=self.label_fg, bg=self.label_bg))
 		if 'command' in kwargs:
-			self.label.bind('<Button-1>', lambda event: kwargs['command'])
+			self.label.bind('<Button-1>', lambda event: kwargs['command']())
 		return
