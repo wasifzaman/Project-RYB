@@ -14,7 +14,12 @@ class Database_editor:
 	def add_student(self, data_table):
 		table_columns = {
 			#names of table columns
-			'student_info': [row[1] for row in self.cur.execute('PRAGMA table_info(student_info)')]
+			'student_info': [row[1] for row in self.cur.execute('PRAGMA table_info(student_info)')],
+			'address': [row[1] for row in self.cur.execute('PRAGMA table_info(address)')],
+			'contact_info': [row[1] for row in self.cur.execute('PRAGMA table_info(contact_info)')],
+			'class_info': [row[1] for row in self.cur.execute('PRAGMA table_info(class_info)')],
+			'card': [row[1] for row in self.cur.execute('PRAGMA table_info(card)')],
+			'notes': [row[1] for row in self.cur.execute('PRAGMA table_info(notes)')]
 		}
 
 		for table_name, table_columns_ in table_columns.items():
@@ -40,6 +45,31 @@ class Database_editor:
 			column: column_data for (column, column_data) in \
 			zip([row[1] for row in self.cur.execute('PRAGMA table_info(student_info)')], \
 				[row for row in self.cur.execute('SELECT * FROM student_info WHERE id=?', (id, ))][0])
+			})
+		data.update({
+			column: column_data for (column, column_data) in \
+			zip([row[1] for row in self.cur.execute('PRAGMA table_info(address)')], \
+				[row for row in self.cur.execute('SELECT * FROM address WHERE id=?', (id, ))][0])
+			})
+		data.update({
+			column: column_data for (column, column_data) in \
+			zip([row[1] for row in self.cur.execute('PRAGMA table_info(contact_info)')], \
+				[row for row in self.cur.execute('SELECT * FROM contact_info WHERE id=?', (id, ))][0])
+			})
+		data.update({
+			column: column_data for (column, column_data) in \
+			zip([row[1] for row in self.cur.execute('PRAGMA table_info(class_info)')], \
+				[row for row in self.cur.execute('SELECT * FROM class_info WHERE id=?', (id, ))][0])
+			})
+		data.update({
+			column: column_data for (column, column_data) in \
+			zip([row[1] for row in self.cur.execute('PRAGMA table_info(card)')], \
+				[row for row in self.cur.execute('SELECT * FROM card WHERE id=?', (id, ))][0])
+			})
+		data.update({
+			column: column_data for (column, column_data) in \
+			zip([row[1] for row in self.cur.execute('PRAGMA table_info(notes)')], \
+				[row for row in self.cur.execute('SELECT * FROM notes WHERE id=?', (id, ))][0])
 			})
 
 		return data

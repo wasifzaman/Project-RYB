@@ -26,6 +26,7 @@ pick_up_person.add_tag(student_data, 'pick_up_person')
 home_phone.add_tag(student_data, 'home_phone')
 cell_phone_1.add_tag(student_data, 'cell_phone_1')
 cell_phone_2.add_tag(student_data, 'cell_phone_2')
+email.add_tag(student_data, 'email')
 
 classes_awarded.add_tag(student_data, 'classes_awarded')
 classes_remaining.add_tag(student_data, 'classes_remaining')
@@ -36,6 +37,8 @@ card_printed.add_tag(student_data, 'card_printed')
 address_.add_tag(student_data, 'address')
 city.add_tag(student_data, 'city')
 zipcode.add_tag(student_data, 'zipcode')
+
+notes_.add_tag(student_data, 'notes')
 
 ''' config file '''
 config = configparser.ConfigParser()
@@ -68,7 +71,7 @@ def fetch_student():
 	return
 
 
-#Button(add_student, text='Add Student', command=add_student_).pack()
-Button(add_student, text='Fetch Student', command=fetch_student).pack()
+Button(add_student, text='Add Student', command=add_student_).pack()
+#Button(add_student, text='Fetch Student', command=fetch_student).pack()
 
 add_student.mainloop()
