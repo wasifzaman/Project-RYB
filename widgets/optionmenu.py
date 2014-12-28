@@ -32,6 +32,12 @@ class Optionmenu(Widget_):
 			self.combobox['values'] = tuple(self.options)
 		if 'font' in kwargs:
 			self.combobox.config(font=kwargs['font'])
+		if 'label_bg' in kwargs:
+			self.label_bg = kwargs['label_bg']
+			self.label.config(bg=self.label_bg)
+		if 'label_fg' in kwargs:
+			self.label_fg = kwargs['label_fg']
+			self.label.config(fg=self.label_fg)
 
 
 	pass

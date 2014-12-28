@@ -30,6 +30,12 @@ class Textbox(Widget_):
 			self.label.config(text=kwargs['label'])
 		if 'entry' in kwargs:
 			self.stringvar.set(kwargs['entry'])
+		if 'label_bg' in kwargs:
+			self.label_bg = kwargs['label_bg']
+			self.label.config(bg=self.label_bg)
+		if 'label_fg' in kwargs:
+			self.label_fg = kwargs['label_fg']
+			self.label.config(fg=self.label_fg)
 
 	def set_input_restriction(self, string):
 		def OnValidate(d, i, P, s, S, v, V, W, string):

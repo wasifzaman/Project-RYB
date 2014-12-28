@@ -9,6 +9,8 @@ images = os.path.abspath(os.pardir) + '\images\\' #image directory
 import button
 import image
 import add_student_
+import scan_student_
+import student_list_
 
 ''' root window '''
 root = Tk()
@@ -65,5 +67,8 @@ print_report.widget_frame.grid(pady=(0, 1))
 exit.widget_frame.grid(pady=(0, 1))
 
 add_student.settings(command=add_student_.start_window)
+scan_student.settings(command=scan_student_.start_window)
+student_db.settings(command=student_list_.start_window)
+exit.settings(command=root.destroy)
 
 root.mainloop()

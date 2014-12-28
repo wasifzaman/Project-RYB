@@ -18,10 +18,14 @@ add_student.option_add('*Label.Font', 'Helvetica 11')
 add_student.option_add('*Entry.Font', 'Helvetica 11')
 
 ''' frame initialization '''
-notebook_frame = Frame(add_student)
+notebook_frame = Frame(add_student)#, bg='#2A2A3D')
+button_frame = Frame(add_student, bg='#2A2A3D')
+button_container_frame = Frame(button_frame, bg='#2A2A3D')
 
 ''' frame packing '''
 notebook_frame.pack()
+button_frame.pack(fill=X)
+button_container_frame.pack()
 
 ''' notebook '''
 student_info_notebook_1 = tkinter.ttk.Notebook(notebook_frame)
@@ -36,7 +40,7 @@ notes = Frame(notes_notebook)
 portrait = Frame(portrait_notebook)
 student_info_notebook_1.grid(row=0, column=0)
 student_info_notebook_2.grid(row=1, column=0)
-notes_notebook.grid(row=2, column=0, sticky=W)
+notes_notebook.grid(row=1, column=1, sticky=N+W)
 portrait_notebook.grid(row=0, column=1, sticky=W)
 student_info_notebook_1.add(general, text='General')
 student_info_notebook_1.add(address, text='Address')
@@ -48,6 +52,7 @@ portrait_notebook.add(portrait, text='Photo')
 ''' style '''
 tab_style = tkinter.ttk.Style()
 tab_style.configure('TNotebook.Tab', font=('Helvetica', 11))
+#tab_style.configure('TNotebook', background='#2A2A3D', padding=-5)
 
 ''' widgets '''
 first_name = textbox.Textbox(general, 0, 0)
@@ -76,6 +81,12 @@ cell_phone_1 = textbox.Textbox(contact, 8, 0)
 cell_phone_2 = textbox.Textbox(contact, 9, 0)
 notes_ = multiline_textbox.Multiline_textbox(notes, 10, 0)
 portrait_ = image.Image_(portrait, 0, 0)
+add_button = button.Button_(button_container_frame, 0, 0)
+return_button = button.Button_(button_container_frame, 1, 0)
+
+''' hover button colors '''
+label_bg = '#1C528A'
+hover_bg = '#2C82DB'
 
 ''' widget settings '''
 first_name.settings(label='First Name')
@@ -102,14 +113,22 @@ pick_up_person.settings(label='Pick Up Person')
 home_phone.settings(label='Home Phone')
 cell_phone_1.settings(label='Cell Phone 1')
 cell_phone_2.settings(label='Cell Phone 2')
-notes_.settings(label='Notes', height=10, entry_width=36)
+notes_.settings(height=10, entry_width=36)
 notes_.entry.config(font='Helvetica 11')
 notes_.label.pack_forget()
 portrait_.settings(image=student_images + 'null_portrait.jpg', resize=(135, 135))
+add_button.settings(text='Add Student', label_bg=label_bg, hover_bg=hover_bg)
+return_button.settings(text='Return to Main Menu', label_bg=label_bg, hover_bg=hover_bg)
 
 zipcode.set_input_restriction('int')
 home_phone.set_input_restriction('int')
 cell_phone_1.set_input_restriction('int')
 cell_phone_2.set_input_restriction('int')
+
+add_button.label.config(width=30)
+return_button.label.config(width=30)
+
+add_button.widget_frame.grid(pady=1)
+return_button.widget_frame.grid(pady=(0, 1))
 
 ''' set fill tags '''

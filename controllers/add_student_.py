@@ -9,14 +9,14 @@ import db_test
 import add_widget_get_
 import add_widget_set
 
-''' tag library '''
-'''
-each tag library corresponds to sqlite table name
-each tag corresponds to sqlite database column name
-'''
-
 def start_window():
 	import add_student
+	
+	''' tag library '''
+	'''
+	each tag library corresponds to sqlite table name
+	each tag corresponds to sqlite database column name
+	'''
 
 	student_data, payment_info = {'id': add_student.barcode}, {'id': add_student.barcode}
 
@@ -73,7 +73,7 @@ def start_window():
 
 		return
 
-	Button(add_student.add_student, text='Fetch Student', command=fetch_student).pack()
+	#Button(add_student.add_student, text='Fetch Student', command=fetch_student).pack()
 
 
 #Button(add_student, text='Add Student', command=add_student_).pack()
