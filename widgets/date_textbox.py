@@ -70,9 +70,17 @@ class Date_textbox(Widget_):
 	def settings(self, **kwargs):
 		if 'label' in kwargs:
 			self.label.config(text=kwargs['label'])
-		elif 'date' in kwargs:
+		if 'entry_state' in kwargs:
+			self.entry_state = kwargs['entry_state']
+			self.month_entry.config(state=self.entry_state)
+			self.day_entry.config(state=self.entry_state)
+			self.year_entry.config(state=self.entry_state)
+		if 'date' in kwargs:
 			#expects a full datetime string entry ex: 2014-12-31 00:00:00
-			print(kwargs['date'][:10])
+			if hasattr(self, 'entry_state') and self.entry_state == DISABLED:
+				self.month_entry.config(state=NORMAL)
+				self.day_entry.config(state=NORMAL)
+				self.year_entry.config(state=NORMAL)
 			date = kwargs['date'][:10].split('-')
 			y, m, d = date[0], date[1], date[2]
 			self.month_entry.delete(0, END)
@@ -81,6 +89,10 @@ class Date_textbox(Widget_):
 			self.month_entry.insert(0, m)
 			self.day_entry.insert(0, d)
 			self.year_entry.insert(0, y)
+			if hasattr(self, 'entry_state') and self.entry_state == DISABLED:
+				self.month_entry.config(state=DISABLED)
+				self.day_entry.config(state=DISABLED)
+				self.year_entry.config(state=DISABLED)
 
 	pass
 

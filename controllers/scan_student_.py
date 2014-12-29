@@ -5,7 +5,9 @@ sys.path.append(os.path.abspath(os.pardir) + '\database') #windows directory
 controllers = os.path.abspath(os.pardir) + '\controllers\\' #controller directory
 
 from tkinter import *
+from imp import reload
 import db_test
+import student_set
 import add_widget_get_
 import add_widget_set
 
@@ -17,6 +19,11 @@ each tag corresponds to sqlite database column name
 
 def start_window():
 	import scan_student
+
+	if not hasattr(scan_student, 'load_state'):
+		setattr(scan_student, 'load_state', True)
+	else:
+		reload(scan_student)
 
 	student_data, payment_info = {'id': scan_student.barcode}, {'id': scan_student.barcode}
 
@@ -59,16 +66,36 @@ def start_window():
 		data = get_data_from_lib('student_data')
 		db_editor.scan_student(data)
 
-	''' temp '''
 	''' fetch data '''
-	def fetch_student():
+	def fetch_student(id=False):
 		db_editor = db_test.Database_editor()
 		db_editor.create_open_database(config['DEFAULT']['DBFILEPATH'])
 
-		data = db_editor.fetch_data(scan_student.search_value.get_())
+		if len(scan_student.search_value.get_()) == 0: return #prevent blank ids
+		data = db_editor.fetch_data(id if id else scan_student.search_value.get_())
 		for widget_name, widget in student_data.items():
 			if widget_name in data:
 				#remove this if statement, solidify code
 				widget.set(data[widget_name])
 
 		return
+
+	def fetch_student_set():
+		db_editor = db_test.Database_editor()
+		db_editor.create_open_database(config['DEFAULT']['DBFILEPATH'])
+
+		column_name = {
+			'First Name': 'first_name',
+			'Last Name': 'last_name'
+		}
+
+		ordered_columns = ['id', 'first_name', 'last_name', 'chinese_name', 'date_of_birth'] #column order of table
+		data = db_editor.fetch_id_set(scan_student.search_value.get_(), column_name[scan_student.search_type.stringvar.get()])
+		if len(data) == 1:
+			fetch_student(data[0]['id'])
+		elif len(data) > 1:
+			#order columns and pass it to student_set
+			ordered_data = [[student[column_name_] for column_name_ in ordered_columns] for student in data]
+			student_set.start_window(ordered_data)
+
+	scan_student.search_button.settings(command=lambda: fetch_student_set() if scan_student.search_type.stringvar.get() != 'Barcode' else fetch_student())

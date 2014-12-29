@@ -5,12 +5,18 @@ sys.path.append(os.path.abspath(os.pardir) + '\database') #windows directory
 controllers = os.path.abspath(os.pardir) + '\controllers\\' #controller directory
 
 from tkinter import *
+from imp import reload
 import db_test
 import add_widget_get_
 import add_widget_set
 
 def start_window():
 	import student_list
+
+	if not hasattr(student_list, 'load_state'):
+		setattr(student_list, 'load_state', True)
+	else:
+		reload(student_list)
 	
 	''' config file '''
 	config = configparser.ConfigParser()

@@ -5,12 +5,18 @@ sys.path.append(os.path.abspath(os.pardir) + '\database') #windows directory
 controllers = os.path.abspath(os.pardir) + '\controllers\\' #controller directory
 
 from tkinter import *
+from imp import reload
 import db_test
 import add_widget_get_
 import add_widget_set
 
 def start_window():
 	import add_student
+
+	if not hasattr(add_student, 'load_state'):
+		setattr(add_student, 'load_state', True)
+	else:
+		reload(add_student)
 	
 	''' tag library '''
 	'''
@@ -22,6 +28,7 @@ def start_window():
 
 	add_student.first_name.add_tag(student_data, 'first_name')
 	add_student.last_name.add_tag(student_data, 'last_name')
+	add_student.chinese_name.add_tag(student_data, 'chinese_name')
 	add_student.date_of_birth.add_tag(student_data, 'date_of_birth')
 	add_student.age.add_tag(student_data, 'age')
 
@@ -50,13 +57,13 @@ def start_window():
 
 	''' data '''
 	def get_data_from_lib(lib_name):
-		return {col_name: value.get_() for col_name, value in eval(lib_name).items()}
+		return {col_name: value.get_() for col_name, value in lib_name.items()}
 
 	def add_student_():
 		db_editor = db_test.Database_editor()
 		db_editor.create_open_database(config['DEFAULT']['DBFILEPATH'])
 
-		data = get_data_from_lib('student_data')
+		data = get_data_from_lib(student_data)
 		db_editor.add_student(data)
 
 	''' temp '''
@@ -73,10 +80,5 @@ def start_window():
 
 		return
 
-	#Button(add_student.add_student, text='Fetch Student', command=fetch_student).pack()
-
-
-#Button(add_student, text='Add Student', command=add_student_).pack()
-#
-
-#add_student.mainloop()
+	add_student.add_button.settings(command=add_student_)
+	add_student.return_button.settings(command=add_student.add_student.destroy)

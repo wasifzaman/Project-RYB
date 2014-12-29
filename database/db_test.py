@@ -34,6 +34,21 @@ class Database_editor:
 			self.cur.execute(script, table_values)
 			self.conn.commit()
 
+	def fetch_id_set(self, data, type_):
+		script = 'SELECT * FROM student_info WHERE ' + type_ + '=?'
+		student_set = [row for row in self.cur.execute(script, (data, ))]
+
+		id_set = []
+
+		for student_info in student_set:
+			id_set.append({
+				column: column_data for (column, column_data) in \
+				zip([row[1] for row in self.cur.execute('PRAGMA table_info(student_info)')],
+					student_info)
+				})
+
+		return(id_set)
+
 	def fetch_data(self, id):
 		'''
 		add data from table by id

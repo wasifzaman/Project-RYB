@@ -5,6 +5,7 @@ sys.path.append(os.path.abspath(os.pardir) + '\database') #windows directory
 controllers = os.path.abspath(os.pardir) + '\controllers\\' #controller directory
 
 from tkinter import *
+from imp import reload
 import db_test
 import add_widget_get_
 import add_widget_set
@@ -17,6 +18,11 @@ each tag corresponds to sqlite database column name
 
 def start_window():
 	import edit_student
+
+	if not hasattr(edit_student, 'load_state'):
+		setattr(edit_student, 'load_state', True)
+	else:
+		reload(edit_student)
 
 	student_data, payment_info = {'id': edit_student.barcode}, {'id': edit_student.barcode}
 

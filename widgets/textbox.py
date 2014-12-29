@@ -1,7 +1,7 @@
 '''
 '''
 from widget_ import Widget_
-from tkinter import Frame, Label, Entry, StringVar, LEFT, RIGHT, E, RIDGE, FLAT
+from tkinter import Frame, Label, Entry, StringVar, LEFT, RIGHT, E, RIDGE, FLAT, DISABLED, NORMAL
 
 class Textbox(Widget_):
 
@@ -28,8 +28,15 @@ class Textbox(Widget_):
 	def settings(self, **kwargs):
 		if 'label' in kwargs:
 			self.label.config(text=kwargs['label'])
+		if 'entry_state' in kwargs:
+			self.entry_state = kwargs['entry_state']
+			self.entry.config(state=self.entry_state)
 		if 'entry' in kwargs:
+			if hasattr(self, 'entry_state') and self.entry_state == DISABLED:
+				self.entry.config(state=NORMAL)
 			self.stringvar.set(kwargs['entry'])
+			if hasattr(self, 'entry_state') and self.entry_state == DISABLED:
+				self.entry.config(state=DISABLED)
 		if 'label_bg' in kwargs:
 			self.label_bg = kwargs['label_bg']
 			self.label.config(bg=self.label_bg)

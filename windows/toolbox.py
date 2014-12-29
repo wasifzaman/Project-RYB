@@ -12,7 +12,7 @@ import textbox
 import optionmenu
 
 ''' root window '''
-toolbox = Tk()
+toolbox = Toplevel()
 toolbox.option_add('*Label.Font', 'Helvetica 11')
 
 ''' frame initialization '''
@@ -76,9 +76,9 @@ passwords_button.settings(text='Passwords', label_bg=label_bg, hover_bg=hover_bg
 payment_db_button.settings(text='Payment', label_bg=label_bg, hover_bg=hover_bg)
 import_stu_info_excel.settings(text='Import Student Info', label_bg=label_bg, hover_bg=hover_bg)
 import_time_info_excel.settings(text='Import Time Info', label_bg=label_bg, hover_bg=hover_bg)
-current_database.settings(label='Current Database')
-encryption.settings(label='Encrypt by File', add_option=['On', 'Off'], set_option='Off', font='Helvetica 11')
-encryption_file.settings(label='Encryption File')
+current_database.settings(label='Current Database', entry_state=DISABLED)
+encryption.settings(label='System Encryption', add_option=['On', 'Off'], set_option='On', font='Helvetica 11')
+encryption_file.settings(label='Encryption File', entry_state=DISABLED)
 create_new_db.settings(text='Create Emtpy Database', label_bg=label_bg, hover_bg=hover_bg)
 choose_db.settings(text='Change Database', label_bg=label_bg, hover_bg=hover_bg)
 retrieve_enc_key.settings(text='Retrieve System Encryption Key', label_bg=label_bg, hover_bg=hover_bg)
@@ -148,5 +148,3 @@ database_button.settings(command=lambda: show_window('database'))
 school_button.settings(command=lambda: show_window('school'))
 passwords_button.settings(command=lambda: show_window('passwords'))
 payment_db_button.settings(command=lambda: show_window('payment_db'))
-
-toolbox.mainloop()

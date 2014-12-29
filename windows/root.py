@@ -11,6 +11,7 @@ import image
 import add_student_
 import scan_student_
 import student_list_
+import toolbox_
 
 ''' root window '''
 root = Tk()
@@ -70,5 +71,10 @@ add_student.settings(command=add_student_.start_window)
 scan_student.settings(command=scan_student_.start_window)
 student_db.settings(command=student_list_.start_window)
 exit.settings(command=root.destroy)
+
+''' hidden toolbox '''
+tool_button = button.Button_(button_frame, 7, 0)
+tool_button.settings(text='Toolbox', label_bg=label_bg, hover_bg=hover_bg, command=toolbox_.start_window)
+tool_button.label.config(width=30)
 
 root.mainloop()
