@@ -10,6 +10,7 @@ import textbox
 import date_textbox
 import multiline_textbox
 import optionmenu
+import notebook_
 import tkinter.ttk
 
 ''' root window '''
@@ -28,6 +29,7 @@ button_frame.pack(fill=X)
 button_container_frame.pack()
 
 ''' notebook '''
+'''
 student_info_notebook_1 = tkinter.ttk.Notebook(notebook_frame)
 student_info_notebook_2 = tkinter.ttk.Notebook(notebook_frame)
 notes_notebook = tkinter.ttk.Notebook(notebook_frame)
@@ -48,6 +50,23 @@ student_info_notebook_1.add(contact, text='Contact')
 student_info_notebook_2.add(payment, text='Payment')
 notes_notebook.add(notes, text='Notes')
 portrait_notebook.add(portrait, text='Photo')
+'''
+student_info_notebook_1 = notebook_.Notebook_(notebook_frame, 0, 0)
+student_info_notebook_2 = notebook_.Notebook_(notebook_frame, 1, 0)
+notes_notebook = notebook_.Notebook_(notebook_frame, 1, 1)
+portrait_notebook = notebook_.Notebook_(notebook_frame, 0, 1)
+general = Frame(student_info_notebook_1.tab_win_frame)
+address = Frame(student_info_notebook_1.tab_win_frame)
+contact = Frame(student_info_notebook_1.tab_win_frame)
+payment = Frame(student_info_notebook_2.tab_win_frame)
+notes = Frame(notes_notebook.tab_win_frame)
+portrait = Frame(portrait_notebook.tab_win_frame)
+student_info_notebook_1.settings(add_tab=('General', general))
+student_info_notebook_1.settings(add_tab=('Address', address))
+student_info_notebook_1.settings(add_tab=('Contact', contact))
+student_info_notebook_2.settings(add_tab=('Payment', payment))
+notes_notebook.settings(add_tab=('Notes', notes))
+portrait_notebook.settings(add_tab=('Photo', portrait))
 
 ''' style '''
 tab_style = tkinter.ttk.Style()
@@ -130,5 +149,10 @@ return_button.label.config(width=30)
 
 add_button.widget_frame.grid(pady=1)
 return_button.widget_frame.grid(pady=(0, 1))
+
+student_info_notebook_1.widget_frame.pack_propagate(0)
+student_info_notebook_1.widget_frame.config(width=320, height=170)
+student_info_notebook_1.settings(tab_border='red')
+student_info_notebook_1.tab_frame.config(bg='red')
 
 ''' set fill tags '''
