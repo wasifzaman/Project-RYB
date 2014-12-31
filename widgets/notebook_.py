@@ -11,10 +11,12 @@ class Notebook_(Widget_):
 		self.last_tab_id = 0
 		self.tabs = {}
 		self.tab_wins = {}
-		self.tab_frame = Frame(self.widget_frame)#, bg='grey')
-		self.tab_win_frame = Frame(self.widget_frame)
-		self.tab_frame.pack(anchor=NW, fill=X)
-		self.tab_win_frame.pack(fill=BOTH)
+		self.tab_frame = Frame(self.widget_frame)
+		self.tab_win_container = Frame(self.widget_frame, bg='red')
+		self.tab_win_frame = Frame(self.tab_win_container)
+		self.tab_frame.pack(anchor=NW, fill=X, padx=(3, 0))
+		self.tab_win_container.pack(fill=BOTH)
+		self.tab_win_frame.pack(padx=1, pady=(1, 1))
 		self.widget_frame.grid(sticky=N+W)
 
 	def show_tab(self, tab_id):

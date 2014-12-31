@@ -25,6 +25,7 @@ button_container_frame = Frame(button_frame, bg='#2A2A3D')
 
 ''' frame packing '''
 notebook_frame.pack()
+Frame(add_student, bg='#C66100', height=5).pack(fill=X)
 button_frame.pack(fill=X)
 button_container_frame.pack()
 
@@ -52,8 +53,8 @@ notes_notebook.add(notes, text='Notes')
 portrait_notebook.add(portrait, text='Photo')
 '''
 student_info_notebook_1 = notebook_.Notebook_(notebook_frame, 0, 0)
-student_info_notebook_2 = notebook_.Notebook_(notebook_frame, 1, 0)
-notes_notebook = notebook_.Notebook_(notebook_frame, 1, 1)
+student_info_notebook_2 = notebook_.Notebook_(notebook_frame, 2, 0)
+notes_notebook = notebook_.Notebook_(notebook_frame, 2, 1)
 portrait_notebook = notebook_.Notebook_(notebook_frame, 0, 1)
 general = Frame(student_info_notebook_1.tab_win_frame)
 address = Frame(student_info_notebook_1.tab_win_frame)
@@ -150,9 +151,7 @@ return_button.label.config(width=30)
 add_button.widget_frame.grid(pady=1)
 return_button.widget_frame.grid(pady=(0, 1))
 
-student_info_notebook_1.widget_frame.pack_propagate(0)
-student_info_notebook_1.widget_frame.config(width=320, height=170)
 student_info_notebook_1.settings(tab_border='red')
-student_info_notebook_1.tab_frame.config(bg='red')
+portrait.grid(pady=1)
 
 ''' set fill tags '''
