@@ -10,8 +10,9 @@ import textbox
 import date_textbox
 import multiline_textbox
 import optionmenu
-import ttkNotebook_style
 import tkinter.ttk
+
+import ttkNotebook_style
 
 ''' root window '''
 add_student = Toplevel()
