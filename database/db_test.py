@@ -90,10 +90,38 @@ class Database_editor:
 		return data
 
 	def get_timeslot(self):
-		return
+		cur_datetime = datetime.datetime.now()
+		cur_date = cur_datetime.date()
+		cur_time = cur_datetime.time()
+		
+		out_minute = cur_time.minute
+		out_hour = cur_time.hour
+
+		#logic
+		if out_minute > 40:
+			out_minute = 0
+			out_hour += 1
+		elif out_minute > 10:
+			out_minute = 30
+		else:
+			out_minute = 0
+
+		out_datetime = datetime.datetime(cur_date.year,
+						cur_date.month,
+						cur_date.day,
+						out_hour,
+						out_minute)
+
+		return out_datetime
 
 	def scan_student(self, barcode, time=False, scan_type='Barcode'):
-		return
+		scan_data = (barcode,
+					datetime.datetime.now(),
+					self.get_timeslot(),
+					scan_type)
+
+		self.cur.execute('INSERT INTO attendance_table VALUES (?, ?, ?, ?)', scan_data)
+		self.conn.commit()
 		
 	def search_database(self, barcode, table):
 		return
@@ -108,6 +136,8 @@ class Database_editor:
 
 #x.create_open_database('test2.db', 'student_db_template.db')
 #x.create_open_database('test2.db')
+
+#x.scan_student('BRK-005')
 
 #x.add_student(data)
 

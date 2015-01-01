@@ -11,6 +11,7 @@ import date_textbox
 import multiline_textbox
 import table
 import optionmenu
+import ttkNotebook_style
 import tkinter.ttk
 
 ''' root window '''
@@ -46,7 +47,7 @@ address = Frame(student_info_notebook_1)
 contact = Frame(student_info_notebook_1)
 payment = Frame(student_info_notebook_2)
 notes = Frame(notes_notebook)
-message = Frame(message_notebook)
+message = Frame(message_notebook, bg='yellow')
 attendance = Frame(attendance_notebook)
 #portrait = Frame(portrait_notebook)
 student_info_notebook_1.grid(row=0, column=0)

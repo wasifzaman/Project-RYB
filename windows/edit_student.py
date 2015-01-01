@@ -11,6 +11,7 @@ import date_textbox
 import multiline_textbox
 import table
 import optionmenu
+import ttkNotebook_style
 import tkinter.ttk
 
 ''' root window '''

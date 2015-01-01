@@ -10,7 +10,7 @@ import textbox
 import date_textbox
 import multiline_textbox
 import optionmenu
-import notebook_
+import ttkNotebook_style
 import tkinter.ttk
 
 ''' root window '''
@@ -19,7 +19,7 @@ add_student.option_add('*Label.Font', 'Helvetica 11')
 add_student.option_add('*Entry.Font', 'Helvetica 11')
 
 ''' frame initialization '''
-notebook_frame = Frame(add_student)#, bg='#2A2A3D')
+notebook_frame = Frame(add_student, bg='#2A2A3D')
 button_frame = Frame(add_student, bg='#2A2A3D')
 button_container_frame = Frame(button_frame, bg='#2A2A3D')
 
@@ -30,7 +30,6 @@ button_frame.pack(fill=X)
 button_container_frame.pack()
 
 ''' notebook '''
-'''
 student_info_notebook_1 = tkinter.ttk.Notebook(notebook_frame)
 student_info_notebook_2 = tkinter.ttk.Notebook(notebook_frame)
 notes_notebook = tkinter.ttk.Notebook(notebook_frame)
@@ -51,28 +50,6 @@ student_info_notebook_1.add(contact, text='Contact')
 student_info_notebook_2.add(payment, text='Payment')
 notes_notebook.add(notes, text='Notes')
 portrait_notebook.add(portrait, text='Photo')
-'''
-student_info_notebook_1 = notebook_.Notebook_(notebook_frame, 0, 0)
-student_info_notebook_2 = notebook_.Notebook_(notebook_frame, 2, 0)
-notes_notebook = notebook_.Notebook_(notebook_frame, 2, 1)
-portrait_notebook = notebook_.Notebook_(notebook_frame, 0, 1)
-general = Frame(student_info_notebook_1.tab_win_frame)
-address = Frame(student_info_notebook_1.tab_win_frame)
-contact = Frame(student_info_notebook_1.tab_win_frame)
-payment = Frame(student_info_notebook_2.tab_win_frame)
-notes = Frame(notes_notebook.tab_win_frame)
-portrait = Frame(portrait_notebook.tab_win_frame)
-student_info_notebook_1.settings(add_tab=('General', general))
-student_info_notebook_1.settings(add_tab=('Address', address))
-student_info_notebook_1.settings(add_tab=('Contact', contact))
-student_info_notebook_2.settings(add_tab=('Payment', payment))
-notes_notebook.settings(add_tab=('Notes', notes))
-portrait_notebook.settings(add_tab=('Photo', portrait))
-
-''' style '''
-tab_style = tkinter.ttk.Style()
-tab_style.configure('TNotebook.Tab', font=('Helvetica', 11))
-#tab_style.configure('TNotebook', background='#2A2A3D', padding=-5)
 
 ''' widgets '''
 first_name = textbox.Textbox(general, 0, 0)
@@ -150,8 +127,5 @@ return_button.label.config(width=30)
 
 add_button.widget_frame.grid(pady=1)
 return_button.widget_frame.grid(pady=(0, 1))
-
-student_info_notebook_1.settings(tab_border='red')
-portrait.grid(pady=1)
 
 ''' set fill tags '''
