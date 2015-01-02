@@ -1,7 +1,7 @@
 import tkinter.ttk
 
 tab_style = tkinter.ttk.Style()
-tab_style.theme_use('default')
+tab_style.theme_use('alt')
 tab_style.configure('TNotebook.Tab',
 	font=('Helvetica', 11),
 	background='#1C528A',

@@ -11,8 +11,9 @@ import date_textbox
 import multiline_textbox
 import table
 import optionmenu
-import ttkNotebook_style
 import tkinter.ttk
+
+import ttkNotebook_style
 
 ''' root window '''
 scan_student = Toplevel()
@@ -22,7 +23,7 @@ scan_student.option_add('*Entry.Font', 'Helvetica 11')
 ''' frame initialization '''
 search_frame = Frame(scan_student, bg='#2A2A3D')
 search_container_frame = Frame(search_frame, bg='#2A2A3D')
-notebook_frame = Frame(scan_student)
+notebook_frame = Frame(scan_student, bg='#2A2A3D')
 button_frame = Frame(scan_student, bg='#2A2A3D')
 button_container_frame = Frame(button_frame, bg='#2A2A3D')
 
@@ -64,11 +65,6 @@ notes_notebook.add(notes, text='Notes')
 message_notebook.add(message, text='Message Center')
 attendance_notebook.add(attendance, text='Attendance Table')
 #portrait_notebook.add(portrait, text='Photo')
-
-''' style '''
-tab_style = tkinter.ttk.Style()
-tab_style.configure('TNotebook.Tab', font=('Helvetica', 11))
-
 
 ''' widgets '''
 search_value = textbox.Textbox(search_container_frame, 0, 0)
@@ -146,6 +142,15 @@ notes_.label.pack_forget()
 create_payment.settings(text='Add Payment', label_bg=label_bg, hover_bg=hover_bg)
 check_in_button.settings(text='Check In Student', label_bg=label_bg, hover_bg=hover_bg)
 return_button.settings(text='Return to Main Menu', label_bg=label_bg, hover_bg=hover_bg)
+attendance_table.settings(sheet_limit=20)
+attendance_table.widget_frame.config(bg='#2A2A3D')
+attendance_table.navigate_frame.config(bg='#2A2A3D')
+attendance_table.first.config(bg='#2A2A3D', fg='white')
+attendance_table.last.config(bg='#2A2A3D', fg='white')
+attendance_table.left.config(bg='#2A2A3D', fg='white')
+attendance_table.right.config(bg='#2A2A3D', fg='white')
+attendance_table.go_to_button.config(bg='#2A2A3D', fg='white')
+attendance_table.go_to.config(font='Helvetica 11')
 #portrait_.settings(image=student_images + 'null_portrait.jpg', resize=(135, 135))
 
 zipcode.set_input_restriction('int')
@@ -162,5 +167,7 @@ return_button.label.config(width=62)
 create_payment.widget_frame.grid(pady=2, padx=1)
 check_in_button.widget_frame.grid(padx=1)
 return_button.widget_frame.grid(pady=(0, 2), columnspan=2)
+
+attendance_table.widget_frame.grid(rowspan=2, sticky=N+S)
 
 ''' set fill tags '''

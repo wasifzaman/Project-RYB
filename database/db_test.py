@@ -114,16 +114,52 @@ class Database_editor:
 
 		return out_datetime
 
-	def scan_student(self, barcode, time=False, scan_type='Barcode'):
-		scan_data = (barcode,
+	def set_attendance(self, id, time=False, scan_type='Barcode'):
+		scan_data = (id,
 					datetime.datetime.now(),
 					self.get_timeslot(),
 					scan_type)
 
 		self.cur.execute('INSERT INTO attendance_table VALUES (?, ?, ?, ?)', scan_data)
 		self.conn.commit()
+
+	def get_attendance(self, id):
+		rows = [row for row in self.cur.execute('SELECT * FROM attendance_table WHERE id=?', (id, ))]
+		formatted_rows = []
+
+		for row in rows:
+			date = datetime.datetime.strftime(datetime.datetime.strptime(row[1][:10], '%Y-%m-%d'), '%m/%d/%Y')
+			actual_time = datetime.datetime.strftime(datetime.datetime.strptime(row[1][11:16], '%H:%M'), '%I:%M %p')
+			timeslot = datetime.datetime.strftime(datetime.datetime.strptime(row[2][11:16], '%H:%M'), '%I:%M %p')
+			
+			formatted_rows.append((date, actual_time, timeslot, row[3]))
+
+		return formatted_rows
+
+	def add_new_payment(self, id, values):
+		payment_data = (id,
+			datetime.datetime.now(),
+			values['total'],
+			values['amount_paid'],
+			values['amount_remaining'],
+			values['payment_type'],
+			values['check_number']
+			)
+
+		self.cur.execute('INSERT INTO payment_info VALUES (?, ?, ?, ?, ?)', payment_data)
+		self.conn.commit()
+
+	def get_payment_info(self, id):
+		rows = [row for row in self.cur.execute('SELECT * FROM payment_info WHERE id=?', (id, ))]
+		formatted_rows = []
+
+		for row in rows:
+			date = datetime.datetime.strftime(datetime.datetime.strptime(row[1][:10], '%Y-%m-%d'), '%m/%d/%Y')
+			formatted_rows.append((date, row[2], row[3], row[4], row[5], row[6]))
+
+		return formatted_rows
 		
-	def search_database(self, barcode, table):
+	def search_database(self, id, table):
 		return
 
 
@@ -137,7 +173,9 @@ class Database_editor:
 #x.create_open_database('test2.db', 'student_db_template.db')
 #x.create_open_database('test2.db')
 
-#x.scan_student('BRK-005')
+#x.set_attendance('BRK-005')
+
+#x.get_attendance('BRK-005')
 
 #x.add_student(data)
 

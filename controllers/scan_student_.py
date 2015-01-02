@@ -10,6 +10,7 @@ import db_test
 import student_set
 import add_widget_get_
 import add_widget_set
+import add_payment_
 
 ''' tag library '''
 '''
@@ -78,6 +79,10 @@ def start_window():
 				#remove this if statement, solidify code
 				widget.set(data[widget_name])
 
+		attendance_data_set = db_editor.get_attendance(id)
+		for attendance_data in attendance_data_set:
+			scan_student.attendance_table.settings(add_row=attendance_data)
+
 		return
 
 	def fetch_student_set():
@@ -98,4 +103,12 @@ def start_window():
 			ordered_data = [[student[column_name_] for column_name_ in ordered_columns] for student in data]
 			student_set.start_window(ordered_data)
 
-	scan_student.search_button.settings(command=lambda: fetch_student_set() if scan_student.search_type.stringvar.get() != 'Barcode' else fetch_student())
+	def create_payment():
+		if len(scan_student.barcode.get_()) == 0: return #prevent blank ids
+
+		add_payment_.start_window(scan_student.barcode.get_())
+
+
+
+	scan_student.search_button.settings(command=lambda: fetch_student_set() if scan_student.search_type.stringvar.get() != 'Barcode' else fetch_student(scan_student.search_value.get_()))
+	scan_student.create_payment.settings(command=lambda: create_payment())

@@ -13,11 +13,23 @@ class Optionmenu(Widget_):
 		self.options = []
 		self.stringvar = StringVar()
 		self.label = Label(self.widget_frame, width=self.label_width, anchor=E)
-		self.combobox = ttk.Combobox(self.widget_frame, textvariable=self.stringvar, state='readonly')
+		self.combobox = ttk.Combobox(self.widget_frame,
+			textvariable=self.stringvar,
+			state='readonly'
+			)
 		self.label.pack(side=LEFT, padx=3)
 		self.combobox.pack(side=LEFT)
 		self.label_bg, self.label_fg, self.label_hover_bg, self.label_hover_fg = None, None, None, None
 		self.entry_bg, self.entry_fg, self.entry_hover_bg, self.entry_hover_fg = None, None, None, None
+		self.combobox_style = ttk.Style()
+		self.combobox_style.configure(
+			'TCombobox',
+			background='white',
+			selectbackground='white',
+			selectforeground='black',
+			borderwidth=0
+			)
+		self.combobox_style.map('TCombobox', fieldbackground=[])
 
 	def settings(self, **kwargs):
 		if 'label' in kwargs:
