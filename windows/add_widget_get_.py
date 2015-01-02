@@ -18,5 +18,5 @@ textbox.Textbox.get_ = lambda self: self.entry.get()
 date_textbox.Date_textbox.get_ = lambda self: datetime.datetime.strptime( \
 	('01' if self.month_entry.get() == '' else self.month_entry.get()) + '/' + \
 	('01' if self.day_entry.get() == '' else self.day_entry.get()) + '/' + \
-	'1900' if self.year_entry.get() == '' else self.year_entry.get(), '%m/%d/%Y')
+	('1900' if self.year_entry.get() == '' else self.year_entry.get()), '%m/%d/%Y')
 multiline_textbox.Multiline_textbox.get_ = lambda self: self.entry.get('1.0', END+'-1c')

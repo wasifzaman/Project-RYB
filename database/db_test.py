@@ -138,24 +138,33 @@ class Database_editor:
 
 	def add_new_payment(self, id, values):
 		payment_data = (id,
-			datetime.datetime.now(),
+			values['date'],
 			values['total'],
-			values['amount_paid'],
-			values['amount_remaining'],
+			values['already_paid'],
+			values['amount_owed'],
 			values['payment_type'],
 			values['check_number']
 			)
 
-		self.cur.execute('INSERT INTO payment_info VALUES (?, ?, ?, ?, ?)', payment_data)
+		self.cur.execute('INSERT INTO payment_info VALUES (?, ?, ?, ?, ?, ?, ?)', payment_data)
 		self.conn.commit()
 
-	def get_payment_info(self, id):
+	def get_payment_info(self, id, last=False):
 		rows = [row for row in self.cur.execute('SELECT * FROM payment_info WHERE id=?', (id, ))]
 		formatted_rows = []
 
 		for row in rows:
 			date = datetime.datetime.strftime(datetime.datetime.strptime(row[1][:10], '%Y-%m-%d'), '%m/%d/%Y')
-			formatted_rows.append((date, row[2], row[3], row[4], row[5], row[6]))
+			formatted_rows.append((id, date, row[2], row[3], row[4], row[5], row[6]))
+
+		if last:
+			data = {
+				column: column_data for (column, column_data) in \
+				zip([row[1] for row in self.cur.execute('PRAGMA table_info(payment_info)')], \
+					[row for row in self.cur.execute('SELECT * FROM payment_info WHERE id=?', (id, ))][-1])
+			}
+
+			return data
 
 		return formatted_rows
 		

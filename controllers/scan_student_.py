@@ -52,6 +52,10 @@ def start_window():
 
 	scan_student.notes_.add_tag(student_data, 'notes')
 
+	scan_student.tuition_paid_day.add_tag(payment_info, 'date')
+	scan_student.total.add_tag(payment_info, 'total')
+	scan_student.amount_owed.add_tag(payment_info, 'amount_owed')
+
 	''' config file '''
 	config = configparser.ConfigParser()
 	config.read(controllers + 'config.ini', encoding='utf-8')
@@ -60,12 +64,14 @@ def start_window():
 	def get_data_from_lib(lib_name):
 		return {col_name: value.get_() for col_name, value in eval(lib_name).items()}
 
+	'''
 	def scan_student_():
 		db_editor = db_test.Database_editor()
 		db_editor.create_open_database(config['DEFAULT']['DBFILEPATH'])
 
 		data = get_data_from_lib('student_data')
 		db_editor.scan_student(data)
+	'''
 
 	''' fetch data '''
 	def fetch_student(id=False):
@@ -82,6 +88,12 @@ def start_window():
 		attendance_data_set = db_editor.get_attendance(id)
 		for attendance_data in attendance_data_set:
 			scan_student.attendance_table.settings(add_row=attendance_data)
+
+		payment_data = db_editor.get_payment_info(id, True)
+		for widget_name, widget in payment_info.items():
+			if widget_name in payment_data:
+				#remove this if statement, solidify code
+				widget.set(payment_data[widget_name])
 
 		return
 
@@ -108,6 +120,13 @@ def start_window():
 
 		add_payment_.start_window(scan_student.barcode.get_())
 
+	def fetch_last_payment():
+		db_editor = db_test.Database_editor()
+		db_editor.create_open_database(config['DEFAULT']['DBFILEPATH'])
+
+
+
+		return
 
 
 	scan_student.search_button.settings(command=lambda: fetch_student_set() if scan_student.search_type.stringvar.get() != 'Barcode' else fetch_student(scan_student.search_value.get_()))

@@ -18,14 +18,14 @@ root = Tk()
 root.option_add('*Label.Font', 'Helvetica 12')
 
 ''' frame initialization '''
-title_frame = Frame(root)
+title_frame = Frame(root, bg='#2A2A3D')
 button_frame = Frame(root, bg='#2A2A3D')
-image_frame = Frame(root)
+image_frame = Frame(root, bg='#2A2A3D')
 
 ''' frame packing '''
-title_frame.pack()
+title_frame.pack(fill=BOTH)
 button_frame.pack(side=LEFT, fill=BOTH)
-image_frame.pack(side=LEFT)
+image_frame.pack(side=LEFT, fill=BOTH)
 
 ''' widgets '''
 add_student = button.Button_(button_frame, 0, 0)
@@ -58,6 +58,8 @@ export_db.label.config(width=30)
 change_lang.label.config(width=30)
 print_report.label.config(width=30)
 exit.label.config(width=30)
+
+school_image.label.config(bg='#2A2A3D')
 
 add_student.widget_frame.grid(pady=(0, 1))
 scan_student.widget_frame.grid(pady=(0, 1))
