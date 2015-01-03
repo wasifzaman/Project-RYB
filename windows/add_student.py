@@ -12,7 +12,7 @@ import multiline_textbox
 import optionmenu
 import tkinter.ttk
 
-#import ttkNotebook_style
+import ttkNotebook_style
 
 ''' root window '''
 add_student = Toplevel()

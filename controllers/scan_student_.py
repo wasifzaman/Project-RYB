@@ -56,6 +56,8 @@ def start_window():
 	scan_student.total.add_tag(payment_info, 'total')
 	scan_student.amount_owed.add_tag(payment_info, 'amount_owed')
 
+	scan_student.attendance_table.settings(add_header=['Date', 'Actual Time', 'Check-in Time', 'Scan Type'])
+
 	''' config file '''
 	config = configparser.ConfigParser()
 	config.read(controllers + 'config.ini', encoding='utf-8')

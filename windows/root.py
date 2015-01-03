@@ -16,6 +16,7 @@ import toolbox_
 ''' root window '''
 root = Tk()
 root.option_add('*Label.Font', 'Helvetica 12')
+root.option_add('*TCombobox*Listbox.font', 'Helvetica 11')
 
 ''' frame initialization '''
 title_frame = Frame(root, bg='#2A2A3D')

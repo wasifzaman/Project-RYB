@@ -168,23 +168,35 @@ class Database_editor:
 
 		return formatted_rows
 		
-	def search_database(self, id, table):
-		return
+	def payment_query(self, start_date, end_date):
+		start_date = datetime.datetime.strptime(start_date, '%m/%d/%Y')
+		end_date = datetime.datetime.strptime(end_date, '%m/%d/%Y')
+		rows = [row for row in self.cur.execute('SELECT * FROM payment_info')]
+
+		result = []
+
+		for row in rows:
+			date = datetime.datetime.strptime(row[1][:10], '%Y-%m-%d')
+			if date >= start_date and date <= end_date:
+				result.append(row)
+
+		return result
 
 
 
-#x = Database_editor()
+x = Database_editor()
 
 
 #x.create_database('test.db')
 #data = {}
 
 #x.create_open_database('test2.db', 'student_db_template.db')
-#x.create_open_database('test2.db')
+x.create_open_database('test2.db')
 
 #x.set_attendance('BRK-005')
 
 #x.get_attendance('BRK-005')
+#x.payment_query('1/1/1900', '1/2/2015')
 
 #x.add_student(data)
 
@@ -194,7 +206,7 @@ class Database_editor:
 
 #x.conn.commit()
 
-#x.conn.close()
+x.conn.close()
 
 #conn = sqlite3.connect('test2.db')
 
