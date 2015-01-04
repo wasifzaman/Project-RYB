@@ -19,7 +19,8 @@ def start_window():
 	else:
 		reload(student_list)
 
-	student_list.student_table.settings(add_row=['Barcode', 'First Name', 'Last Name', 'Chinese Name', 'Date of Birth'])
+	student_list.student_table.settings(add_header=['Barcode', 'First Name', 'Last Name', 'Chinese Name', 'Date of Birth'])
+	#student_list.student_table.settings(add_row=['Barcode', 'First Name', 'Last Name', 'Chinese Name', 'Date of Birth'])
 	
 	''' config file '''
 	config = configparser.ConfigParser()

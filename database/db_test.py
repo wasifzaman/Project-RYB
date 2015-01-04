@@ -27,7 +27,7 @@ class Database_editor:
 			table_values = create a list ordered by columns from table_columns
 			value_fill = (?, ?, ..) tuple converted to string for script
 			'''
-			table_values = tuple([data_table[column_name] for column_name in table_columns_])
+			table_values = tuple([data_table[column_name] if column_name in data_table else '' for column_name in table_columns_])
 			value_fill = str(tuple(['?' for i in table_columns[table_name]])).replace("'", '')
 			script = 'INSERT INTO ' + table_name + ' VALUES ' + value_fill
 

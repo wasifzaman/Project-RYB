@@ -60,6 +60,7 @@ search_value.label.pack(padx=0)
 search_type.label.pack(padx=0)
 search_button.widget_frame.grid(padx=(5, 0))
 return_button.settings(text='Return to Main Menu', label_bg=label_bg, hover_bg=hover_bg)
+student_table.settings(sheet_limit=15)
 
 search_value.label.config(width=5)
 search_type.label.config(width=2)
