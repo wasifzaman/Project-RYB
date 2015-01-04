@@ -27,3 +27,19 @@ def start_window():
 	''' config file '''
 	config = configparser.ConfigParser()
 	config.read(controllers + 'config.ini', encoding='utf-8')
+
+	db_editor = db_test.Database_editor()
+	db_editor.create_open_database(config['DEFAULT']['DBFILEPATH'])
+
+	def change_school():
+		new_school = toolbox.ch_school_to.stringvar.get()
+		db_editor.change_school(new_school)
+		toolbox.current_school.settings(entry=db_editor.get_school())
+
+	schools = config['DEFAULT']['SCHOOLS'].split(',')
+
+
+	toolbox.current_school.settings(entry=db_editor.get_school())
+	toolbox.current_database.settings(entry=config['DEFAULT']['DBFILEPATH'])
+	toolbox.ch_school_to.settings(add_option=schools, set_option=schools[0], font='Helvetica 11')
+	toolbox.ch_school.settings(command=change_school)

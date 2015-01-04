@@ -89,6 +89,32 @@ class Database_editor:
 
 		return data
 
+	def update_student(self, id, data_table):
+		table_columns = {
+			#names of table columns
+			'student_info': [row[1] for row in self.cur.execute('PRAGMA table_info(student_info)')],
+			'address': [row[1] for row in self.cur.execute('PRAGMA table_info(address)')],
+			'contact_info': [row[1] for row in self.cur.execute('PRAGMA table_info(contact_info)')],
+			'class_info': [row[1] for row in self.cur.execute('PRAGMA table_info(class_info)')],
+			'card': [row[1] for row in self.cur.execute('PRAGMA table_info(card)')],
+			'notes': [row[1] for row in self.cur.execute('PRAGMA table_info(notes)')]
+		}
+
+		for table_name, table_columns_ in table_columns.items():
+			'''
+			table_values = create a list ordered by columns from table_columns
+			value = finds the corresponding value in the table_values by index
+			'''
+			table_values = tuple([data_table[column_name] for column_name in table_columns_])
+
+			for column in table_columns_[1:]:
+				value = str(table_values[table_columns_.index(column)])
+				script = 'UPDATE ' + table_name + ' SET ' + column + '=? WHERE id=?'
+				self.cur.execute(script, (value, id))
+				self.conn.commit()
+
+		return
+
 	def get_timeslot(self):
 		cur_datetime = datetime.datetime.now()
 		cur_date = cur_datetime.date()
@@ -155,7 +181,7 @@ class Database_editor:
 
 		for row in rows:
 			date = datetime.datetime.strftime(datetime.datetime.strptime(row[1][:10], '%Y-%m-%d'), '%m/%d/%Y')
-			formatted_rows.append((id, date, row[2], row[3], row[4], row[5], row[6]))
+			formatted_rows.append([id, date, row[2], row[3], row[4], row[5], row[6]])
 
 		if last:
 			data = {
@@ -182,6 +208,23 @@ class Database_editor:
 
 		return result
 
+	def fetch_all_student(self):
+		rows = [row for row in self.cur.execute('SELECT * FROM student_info ORDER BY id')]
+
+		result = []
+
+		for row in rows:
+			date = datetime.datetime.strftime(datetime.datetime.strptime(row[4][:10], '%Y-%m-%d'), '%m/%d/%Y')
+			result.append([row[0], row[1], row[2], row[3], date])
+
+		return result
+
+	def change_school(self, new_school):
+		self.cur.execute('UPDATE database_info SET school_name=?', (new_school, ))
+		self.conn.commit()
+
+	def get_school(self):
+		return [row for row in self.cur.execute('SELECT * FROM database_info')][0][0]
 
 
 x = Database_editor()
@@ -205,6 +248,7 @@ x.create_open_database('test2.db')
 
 
 #x.conn.commit()
+#x.change_school('BRK')
 
 x.conn.close()
 

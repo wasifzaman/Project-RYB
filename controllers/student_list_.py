@@ -9,6 +9,7 @@ from imp import reload
 import db_test
 import add_widget_get_
 import add_widget_set
+import edit_student_
 
 def start_window():
 	import student_list
@@ -17,6 +18,8 @@ def start_window():
 		setattr(student_list, 'load_state', True)
 	else:
 		reload(student_list)
+
+	student_list.student_table.settings(add_row=['Barcode', 'First Name', 'Last Name', 'Chinese Name', 'Date of Birth'])
 	
 	''' config file '''
 	config = configparser.ConfigParser()
@@ -26,23 +29,20 @@ def start_window():
 	def get_data_from_lib(lib_name):
 		return {col_name: value.get_() for col_name, value in eval(lib_name).items()}
 
-	def student_list_():
+	def fetch_all_student():
+		def bind_single_edit_student(label_, id):
+			label_.bind('<Double-Button-1>', lambda event: edit_student_.start_window(id))
+			return
+
 		db_editor = db_test.Database_editor()
 		db_editor.create_open_database(config['DEFAULT']['DBFILEPATH'])
 
-		data = get_data_from_lib('student_data')
-		db_editor.student_list(data)
-
-	''' temp '''
-	''' fetch data '''
-	def fetch_student():
-		db_editor = db_test.Database_editor()
-		db_editor.create_open_database(config['DEFAULT']['DBFILEPATH'])
-
-		data = db_editor.fetch_data('BRK-001')
-		for widget_name, widget in student_data.items():
-			if widget_name in data:
-				#remove this if statement, solidify code
-				widget.set(data[widget_name])
+		rows = db_editor.fetch_all_student()
+		for row in rows:
+			student_list.student_table.settings(add_row=row)
+			for label in student_list.student_table.rows[-1]:
+				bind_single_edit_student(label, row[0])
 
 		return
+
+	fetch_all_student()

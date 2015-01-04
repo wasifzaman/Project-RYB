@@ -7,7 +7,7 @@ import button
 import image
 
 ''' root window '''
-message = Tk()
+message = Toplevel()
 message.option_add('*Label.Font', 'Helvetica 11')
 message.overrideredirect(1)
 

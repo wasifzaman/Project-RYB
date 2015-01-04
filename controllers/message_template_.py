@@ -25,14 +25,21 @@ def start_window(text, buttons, wraplength=False, message_img=False, title_=''):
 
 	buttons_ = {}
 
-	def return_():
-		message_template.message.destroy()
+	
+	def set_up_single_button(text, return_value):
+		def return_(value):
+			setattr(message_template, 'return_value', value)
+			message_template.message.destroy()
 
-	column_num = 0
-	for button_text in buttons:
 		buttons_[button_text] = button.Button_(message_template.button_container_frame, 0, column_num)
 		buttons_[button_text].settings(text=button_text, label_bg=message_template.label_bg, hover_bg=message_template.hover_bg)
-		buttons_[button_text].settings(command=return_)
+		buttons_[button_text].settings(command=lambda: return_(return_value))
+		
+	column_num = 0
+	for button_props in buttons:
+		button_text = button_props[0]
+		return_value = button_props[1]
+		set_up_single_button(button_text, return_value)
 		column_num += 1
 
 	if wraplength: message_template.message_.config(wraplength=wraplength)
@@ -58,10 +65,11 @@ def start_window(text, buttons, wraplength=False, message_img=False, title_=''):
 
 
 
-	message_template.message.mainloop()
+	message_template.message.wait_window()
 
-start_window('Would you like to continue?',
-	['Yes', 'No', 'Cancel'],
-	message_img=images + 'Warning-Shield-128.png',
-	wraplength=1000,
-	title_='Test')
+
+#start_window('Would you like to continue?',
+#	[('Yes', True), ('No', False), ('Cancel', 'Cancel')],
+#	message_img=images + 'Warning-Shield-128.png',
+#	wraplength=1000,
+#	title_='Test')

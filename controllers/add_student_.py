@@ -66,19 +66,5 @@ def start_window():
 		data = get_data_from_lib(student_data)
 		db_editor.add_student(data)
 
-	''' temp '''
-	''' fetch data '''
-	def fetch_student():
-		db_editor = db_test.Database_editor()
-		db_editor.create_open_database(config['DEFAULT']['DBFILEPATH'])
-
-		data = db_editor.fetch_data('BRK-001')
-		for widget_name, widget in student_data.items():
-			if widget_name in data:
-				#remove this if statement, solidify code
-				widget.set(data[widget_name])
-
-		return
-
 	add_student.add_button.settings(command=add_student_)
 	add_student.return_button.settings(command=add_student.add_student.destroy)

@@ -11,9 +11,12 @@ import table
 import textbox
 import optionmenu
 
+import ttkNotebook_style
+
 ''' root window '''
 toolbox = Toplevel()
 toolbox.option_add('*Label.Font', 'Helvetica 11')
+toolbox.option_add('*Entry.Font', 'Helvetica 11')
 
 ''' frame initialization '''
 menu_frame = Frame(toolbox, bg='#2A2A3D')

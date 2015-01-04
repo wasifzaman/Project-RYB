@@ -16,7 +16,7 @@ each tag library corresponds to sqlite table name
 each tag corresponds to sqlite database column name
 '''
 
-def start_window():
+def start_window(id):
 	import edit_student
 
 	if not hasattr(edit_student, 'load_state'):
@@ -28,6 +28,7 @@ def start_window():
 
 	edit_student.first_name.add_tag(student_data, 'first_name')
 	edit_student.last_name.add_tag(student_data, 'last_name')
+	edit_student.chinese_name.add_tag(student_data, 'chinese_name')
 	edit_student.date_of_birth.add_tag(student_data, 'date_of_birth')
 	edit_student.age.add_tag(student_data, 'age')
 
@@ -50,37 +51,59 @@ def start_window():
 
 	edit_student.notes_.add_tag(student_data, 'notes')
 
+	edit_student.tuition_paid_day.add_tag(payment_info, 'date')
+	edit_student.total.add_tag(payment_info, 'total')
+	edit_student.amount_owed.add_tag(payment_info, 'amount_owed')
+
+	edit_student.attendance_table.settings(add_header=['Date', 'Actual Time', 'Check-in Time', 'Scan Type'])
+
 	''' config file '''
 	config = configparser.ConfigParser()
 	config.read(controllers + 'config.ini', encoding='utf-8')
 
 	''' data '''
 	def get_data_from_lib(lib_name):
-		return {col_name: value.get_() for col_name, value in eval(lib_name).items()}
+		return {col_name: value.get_() for col_name, value in lib_name.items()}
 
-	def edit_student_():
-		db_editor = db_test.Database_editor()
-		db_editor.create_open_database(config['DEFAULT']['DBFILEPATH'])
-
-		data = get_data_from_lib('student_data')
-		db_editor.edit_student(data)
-
-	''' temp '''
 	''' fetch data '''
 	def fetch_student():
 		db_editor = db_test.Database_editor()
 		db_editor.create_open_database(config['DEFAULT']['DBFILEPATH'])
 
-		data = db_editor.fetch_data('BRK-001')
+		data = db_editor.fetch_data(id if id else edit_student.search_value.get_())
 		for widget_name, widget in student_data.items():
 			if widget_name in data:
 				#remove this if statement, solidify code
 				widget.set(data[widget_name])
 
+		attendance_data_set = db_editor.get_attendance(id)
+		for attendance_data in attendance_data_set:
+			edit_student.attendance_table.settings(add_row=attendance_data)
+
+		payment_data = db_editor.get_payment_info(id, True)
+		for widget_name, widget in payment_info.items():
+			if widget_name in payment_data:
+				#remove this if statement, solidify code
+				widget.set(payment_data[widget_name])
+
 		return
 
-		#Button(edit_student.edit_student, text='Fetch Student', command=fetch_student).pack()
+	def update_student():
+		db_editor = db_test.Database_editor()
+		db_editor.create_open_database(config['DEFAULT']['DBFILEPATH'])
 
+	def create_payment():
+		if len(edit_student.barcode.get_()) == 0: return #prevent blank ids
 
-	#Button(edit_student, text='Add Student', command=edit_student_).pack()
-	#
+		add_payment_.start_window(edit_student.barcode.get_())
+
+	def update_student():
+		db_editor = db_test.Database_editor()
+		db_editor.create_open_database(config['DEFAULT']['DBFILEPATH'])
+
+		data = get_data_from_lib(student_data)
+		db_editor.update_student(id, data)
+
+	edit_student.save_button.settings(command=update_student)
+
+	fetch_student()

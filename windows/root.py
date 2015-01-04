@@ -3,6 +3,7 @@ from tkinter import *
 import os, sys
 sys.path.append(os.path.abspath(os.pardir) + '\widgets') #widget directory
 sys.path.append(os.path.abspath(os.pardir) + '\controllers') #controllers
+sys.path.append(os.path.abspath(os.pardir) + '\miscellaneous') #controllers
 controllers = os.path.abspath(os.pardir) + '\controllers\\'
 images = os.path.abspath(os.pardir) + '\images\\' #image directory
 
@@ -12,6 +13,10 @@ import add_student_
 import scan_student_
 import student_list_
 import toolbox_
+import message_template_
+import print_report_
+
+from message_strings import message_strings
 
 ''' root window '''
 root = Tk()
@@ -73,11 +78,15 @@ exit.widget_frame.grid(pady=(0, 1))
 add_student.settings(command=add_student_.start_window)
 scan_student.settings(command=scan_student_.start_window)
 student_db.settings(command=student_list_.start_window)
+print_report.settings(command=print_report_.start_window)
 exit.settings(command=root.destroy)
+export_db.settings(command=lambda: eval(message_strings['feature unavailable']))
 
 ''' hidden toolbox '''
 tool_button = button.Button_(button_frame, 7, 0)
 tool_button.settings(text='Toolbox', label_bg=label_bg, hover_bg=hover_bg, command=toolbox_.start_window)
+tool_button.settings(image=images + 'Warning-Shield-128.png',
+	image_resize=(30, 30))
 tool_button.label.config(width=30)
 
 root.mainloop()

@@ -45,7 +45,7 @@ tab_style.configure('TNotebook.Tab', font=('Helvetica', 11))
 search_value = textbox.Textbox(search_container_frame, 0, 0)
 search_type = optionmenu.Optionmenu(search_container_frame, 0, 1)
 search_button = button.Button_(search_container_frame, 0, 2)
-attendance_table = table.Table(notebook_frame, 5, 5)
+student_table = table.Table(notebook_frame, 5, 5)
 return_button = button.Button_(button_container_frame, 1, 0)
 
 ''' hover button colors '''

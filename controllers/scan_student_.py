@@ -30,6 +30,7 @@ def start_window():
 
 	scan_student.first_name.add_tag(student_data, 'first_name')
 	scan_student.last_name.add_tag(student_data, 'last_name')
+	scan_student.chinese_name.add_tag(student_data, 'chinese_name')
 	scan_student.date_of_birth.add_tag(student_data, 'date_of_birth')
 	scan_student.age.add_tag(student_data, 'age')
 
@@ -65,15 +66,6 @@ def start_window():
 	''' data '''
 	def get_data_from_lib(lib_name):
 		return {col_name: value.get_() for col_name, value in eval(lib_name).items()}
-
-	'''
-	def scan_student_():
-		db_editor = db_test.Database_editor()
-		db_editor.create_open_database(config['DEFAULT']['DBFILEPATH'])
-
-		data = get_data_from_lib('student_data')
-		db_editor.scan_student(data)
-	'''
 
 	''' fetch data '''
 	def fetch_student(id=False):
