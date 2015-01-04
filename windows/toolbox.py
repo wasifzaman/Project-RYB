@@ -66,7 +66,6 @@ Frame(database, bg='#C66100', height=5).grid(row=1, columnspan=2, sticky=E+W)
 Frame(payment_db, bg='#C66100', height=5).grid(row=1, columnspan=2, sticky=E+W)
 Frame(school, bg='#C66100', height=5).grid(row=2, columnspan=2, sticky=E+W)
 
-
 ''' hover button colors '''
 label_bg = '#1C528A'
 hover_bg = '#2C82DB'
