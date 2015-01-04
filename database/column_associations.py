@@ -1,4 +1,4 @@
-column_associations = {
+info_columns = {
 	'Barcode': 'id',
 	'First Name': 'first_name',
 	'Last Name': 'last_name',
@@ -13,4 +13,10 @@ column_associations = {
 	'Address': 'address',
 	'City': 'city',
 	'Zip': 'zipcode'
+}
+
+payment_columns = {
+	'Barcode': 'id',
+	'Payment Date': 'date',
+	'Payment Amount': 'already_paid'
 }

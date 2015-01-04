@@ -6,6 +6,7 @@ controllers = os.path.abspath(os.pardir) + '\controllers\\' #controller director
 
 from tkinter import *
 from tkinter import filedialog
+import tkinter.ttk as ttk
 from imp import reload
 import db_test
 import convert_xlsx_to_db
@@ -35,18 +36,13 @@ def start_window():
 		destination = import_from_xlsx.destination_path.get_()
 
 		convert_xlsx_to_db.convert_database(source, destination)
-		return
+		import_from_xlsx.import_from_xlsx.destroy()
 
 	import_from_xlsx.import_browse_button.settings(\
 		command=lambda: import_from_xlsx.import_xlsx_path.set(filedialog.askopenfile().name))
 	import_from_xlsx.time_browse_button.settings(\
 		command=lambda: import_from_xlsx.time_xlsx_path.set(filedialog.askopenfile().name))
 	import_from_xlsx.destination_browse_button.settings(\
-		command=lambda: import_from_xlsx.destination_path.set(filedialog.asksaveasfilename()))
+		command=lambda: import_from_xlsx.destination_path.set(filedialog.asksaveasfilename() + '.db'))
 	import_from_xlsx.cancel_button.settings(command=import_from_xlsx.import_from_xlsx.destroy)
 	import_from_xlsx.import_button.settings(command=convert_to_db)
-
-
-	import_from_xlsx.import_from_xlsx.mainloop()
-
-start_window()

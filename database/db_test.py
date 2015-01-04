@@ -227,14 +227,14 @@ class Database_editor:
 		return [row for row in self.cur.execute('SELECT * FROM database_info')][0][0]
 
 
-x = Database_editor()
+#x = Database_editor()
 
 
 #x.create_database('test.db')
 #data = {}
 
 #x.create_open_database('test2.db', 'student_db_template.db')
-x.create_open_database('test2.db')
+#x.create_open_database('test2.db')
 
 #x.set_attendance('BRK-005')
 
@@ -250,7 +250,7 @@ x.create_open_database('test2.db')
 #x.conn.commit()
 #x.change_school('BRK')
 
-x.conn.close()
+#x.conn.close()
 
 #conn = sqlite3.connect('test2.db')
 

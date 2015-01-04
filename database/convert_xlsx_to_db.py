@@ -15,46 +15,62 @@ def convert_database(source_path, dest_path):
 	num_rows = info_sheet.nrows
 
 	columns = [info_sheet.cell_value(0, i) for i in range(0, info_sheet.ncols)]
-	all_rows = [[info_sheet.cell_value(row, i) for i in range(0, info_sheet.ncols)] for row in range(2, num_rows)]
-
-	#column_number_assoc = {col:columns.index(col) for col in columns}
+	all_rows = [[(info_sheet.cell_value(row, i),info_sheet.cell_type(row, i)) for i in range(0, info_sheet.ncols)] for row in range(2, num_rows)]
 
 	result = []
+	payment_info = []
 
 	for row in all_rows:
 		zipped = list(zip(columns, row))
 		student_ = {}
-		
-		for prop in zipped:
-			column_name = prop[0]
-			if column_name == 'Date of Birth':
-				#convert excel date into datetime
-				days = prop[1] if prop[1] > 25569 else 25570
-				seconds = (days - 25569) * 86400.0
-				dt = datetime.datetime.utcfromtimestamp(seconds)
+		payment_ = {
+			'date': '',
+			'total': '',
+			'already_paid': '',
+			'amount_owed': '',
+			'payment_type': '',
+			'check_number': '',
+		}
 
-				student_[column_associations.column_associations[prop[0]]] = dt
-			elif column_name in column_associations.column_associations:
-				student_[column_associations.column_associations[prop[0]]] = prop[1]
+		for prop in zipped:
+			value = prop[1][0]
+			cell_type = prop[1][1]
+			column_name = prop[0]
+
+			if column_name in column_associations.info_columns:
+				if cell_type == 3:
+					#cell Types: 0=Empty, 1=Text, 2=Number, 3=Date, 4=Boolean, 5=Error, 6=Blan
+					#convert excel date into datetime
+					days = value if value > 25569 else 25570
+					seconds = (days - 25569) * 86400.0
+					value = datetime.datetime.utcfromtimestamp(seconds)
+				student_[column_associations.info_columns[column_name]] = value
+
+			if column_name in column_associations.payment_columns:
+				if cell_type == 3:
+					days = value if value > 25569 else 25570
+					seconds = (days - 25569) * 86400.0
+					value = datetime.datetime.utcfromtimestamp(seconds)
+				payment_[column_associations.payment_columns[column_name]] = value
 
 		result.append(student_)
+		payment_info.append(payment_)
 
 
 	config = configparser.ConfigParser()
 	config.read(controllers + 'config.ini', encoding='utf-8')
 
 	db_editor = db_test.Database_editor()
-	db_editor.create_open_database(config['DEFAULT']['DBFILEPATH'])
+	db_editor.create_open_database(dest_path, config['DEFAULT']['TEMPLATEPATH'])
+	#db_editor.create_open_database(config['DEFAULT']['DBFILEPATH'])
 
 	for student_ in result:
 		db_editor.add_student(student_)
 
+	for payment in payment_info:
+		db_editor.add_new_payment(payment['id'], payment)
 
+	return True
 
-	#print(column_number_assoc)
-	#print(result)
-	#print(columns, all_rows)
-	return
-
-source = 'C:\\Users\\Bipro\\Documents\\GitHub\\Project-RYB\\controllers\\Student DataBase 3.xls'
-convert_database(source, 'test')
+#source = 'C:\\Users\\Bipro\\Documents\\GitHub\\Project-RYB\\controllers\\Student DataBase 3.xls'
+#convert_database(source, 'C:\\users\\bipro\\desktop\\test5.db')
