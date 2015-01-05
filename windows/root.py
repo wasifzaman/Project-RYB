@@ -1,12 +1,14 @@
 import configparser
 from tkinter import *
-import os, sys
+import os, sys, shutil
+import datetime
 sys.path.append(os.path.abspath(os.pardir) + '\widgets') #widget directory
 sys.path.append(os.path.abspath(os.pardir) + '\controllers') #controllers
 sys.path.append(os.path.abspath(os.pardir) + '\miscellaneous') #controllers
 controllers = os.path.abspath(os.pardir) + '\controllers\\'
 images = os.path.abspath(os.pardir) + '\images\\' #image directory
 
+from tkinter import filedialog
 import button
 import image
 import add_student_
@@ -17,6 +19,23 @@ import message_template_
 import print_report_
 
 from message_strings import message_strings
+
+
+''' backup database '''
+def backup_db():
+	''' config file '''
+	config = configparser.ConfigParser()
+	config.read(controllers + 'config.ini', encoding='utf-8')
+
+	dest_path = filedialog.askdirectory()
+	dt = datetime.datetime.now()
+	time = datetime.datetime.strftime(dt, '%I.%M.%p')
+	date = datetime.datetime.strftime(dt, '%m.%d.%Y')
+	db_name = config['DEFAULT']['DBFILEPATH'].split('/')[-1]
+	dot_index =  len(db_name) - db_name[::-1].index('.') - 1
+	out_fname = db_name[:dot_index] + '_backup_' + date + '_' + time +  db_name[dot_index:]
+	
+	shutil.copy(config['DEFAULT']['DBFILEPATH'], dest_path + '/' + out_fname)
 
 ''' root window '''
 root = Tk()
@@ -80,7 +99,8 @@ scan_student.settings(command=scan_student_.start_window)
 student_db.settings(command=student_list_.start_window)
 print_report.settings(command=print_report_.start_window)
 exit.settings(command=root.destroy)
-export_db.settings(command=lambda: eval(message_strings['feature unavailable']))
+export_db.settings(command=backup_db)
+change_lang.settings(command=lambda: eval(message_strings['feature unavailable']))
 
 ''' hidden toolbox '''
 tool_button = button.Button_(button_frame, 7, 0)
