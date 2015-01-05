@@ -11,6 +11,7 @@ import db_test
 import add_widget_get_
 import add_widget_set
 import import_from_xlsx_
+import print_payment_report_
 
 def start_window():
 	import toolbox
@@ -59,3 +60,4 @@ def start_window():
 			filedialog.asksaveasfilename() + '.db',\
 			config['DEFAULT']['TEMPLATEPATH']))
 	toolbox.change_db.settings(command=change_db)
+	toolbox.print_payment.settings(command=print_payment_report_.start_window)

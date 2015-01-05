@@ -195,9 +195,7 @@ class Database_editor:
 		return formatted_rows
 		
 	def payment_query(self, start_date, end_date):
-		start_date = datetime.datetime.strptime(start_date, '%m/%d/%Y')
-		end_date = datetime.datetime.strptime(end_date, '%m/%d/%Y')
-		rows = [row for row in self.cur.execute('SELECT * FROM payment_info')]
+		rows = [row for row in self.cur.execute('SELECT * FROM payment_info ORDER BY date')]
 
 		result = []
 
