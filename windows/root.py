@@ -17,6 +17,8 @@ import student_list_
 import toolbox_
 import message_template_
 import print_report_
+import translations
+import recursion_test
 
 from message_strings import message_strings
 
@@ -108,5 +110,7 @@ tool_button.settings(text='Toolbox', label_bg=label_bg, hover_bg=hover_bg, comma
 tool_button.settings(image=images + 'Warning-Shield-128.png',
 	image_resize=(30, 30))
 tool_button.label.config(width=30)
+
+#recursion_test.translate(root, translations.english_to_chinese)
 
 root.mainloop()

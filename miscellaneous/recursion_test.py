@@ -1,27 +1,19 @@
 from tkinter import *
 
-
-r = Tk()
-
-
-f1 = Frame(r)
-f2 = Frame(r)
-
-ff1 = Frame(f1)
-ff2 = Frame(f2)
-
-ff3 = Label(ff1)
-
-_list = []
-
-def find_all(root):
+def find_all(root, output):
 	if len(root.winfo_children()) == 0:
 		return
 	else:
 		for child in root.winfo_children():
-			_list.append(root)
-			find_all(child)
+			#_list.append(root)
+			find_all(child, output)
+			if type(child) == Label:
+				output.append(child)
 
-find_all(r)
+def translate(root, translation_lib):
+	label_lib = []
+	find_all(root, label_lib)
 
-print(_list)
+	for label in label_lib:
+		if label.cget('text') in translation_lib:
+			label.config(text=translation_lib[label.cget('text')])

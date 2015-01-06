@@ -31,6 +31,7 @@ def start_window(id):
 	edit_student.chinese_name.add_tag(student_data, 'chinese_name')
 	edit_student.date_of_birth.add_tag(student_data, 'date_of_birth')
 	edit_student.age.add_tag(student_data, 'age')
+	edit_student.gender.add_tag(student_data, 'gender')
 
 	edit_student.parent_full_name.add_tag(student_data, 'parent_full_name')
 	edit_student.pick_up_person.add_tag(student_data, 'pick_up_person')
@@ -47,6 +48,7 @@ def start_window(id):
 
 	edit_student.address_.add_tag(student_data, 'address')
 	edit_student.city.add_tag(student_data, 'city')
+	edit_student.state.add_tag(student_data, 'state')
 	edit_student.zipcode.add_tag(student_data, 'zipcode')
 
 	edit_student.notes_.add_tag(student_data, 'notes')
