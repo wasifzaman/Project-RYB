@@ -5,11 +5,16 @@ import shutil
 
 class Database_editor:
 
+	def log_event(self, event_id, message):
+		self.cur.execute('INSERT INTO event_log VALUES (?, ?, ?)', (event_id, datetime.datetime.now(), message))
+		self.conn.commit()
+
 	def create_open_database(self, db_filepath, db_templ_filepath=False):
 		if db_templ_filepath:
 			shutil.copy(db_templ_filepath, db_filepath)
 		self.conn = sqlite3.connect(db_filepath)
 		self.cur = self.conn.cursor()
+		self.log_event(1, 'opened database')
 
 	def add_student(self, data_table):
 		table_columns = {
@@ -33,6 +38,8 @@ class Database_editor:
 
 			self.cur.execute(script, table_values)
 			self.conn.commit()
+
+		self.log_event(2, 'added student ' + data_table['id'])
 
 	def fetch_id_set(self, data, type_):
 		script = 'SELECT * FROM student_info WHERE ' + type_ + '=?'

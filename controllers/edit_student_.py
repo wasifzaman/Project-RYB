@@ -90,10 +90,6 @@ def start_window(id):
 
 		return
 
-	def update_student():
-		db_editor = db_test.Database_editor()
-		db_editor.create_open_database(config['DEFAULT']['DBFILEPATH'])
-
 	def create_payment():
 		if len(edit_student.barcode.get_()) == 0: return #prevent blank ids
 

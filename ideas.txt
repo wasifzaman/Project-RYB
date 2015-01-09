@@ -1,25 +1,4 @@
-PSEUDO
-set tag to widget, tag_list={tag: widget, tag: widget}
-get data={tag: widget_data, tag2: widget_data, ...}
-
-1. prepare_row:
-	row = []
-	for column_name in table:
-		#column_name = tag
-		row.append(data[column_name])
-
-2. SQL: insert row into table
-
-set data to tagged widget
-
-1. get row by id and set dict by column name:
-	row = ['a', 'b', 'c', 'd']
-	column_list = ['id', 'first_name', 'last_name', 'date_of_birth']
-	widget_data = {column: value for (column, value) in zip(column_list, row)}
-2. set data into widgets:
-	for tag in widget_lib:
-		widget.set_(widget_data[tag])
-
-
 Card printed should be date
-ttk.Notebook padding
+
+Eventlist:
+	{1: [1, 'mesage']}
