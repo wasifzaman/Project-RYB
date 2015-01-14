@@ -120,10 +120,15 @@ def start_window():
 		db_editor = db_test.Database_editor()
 		db_editor.create_open_database(config['DEFAULT']['DBFILEPATH'])
 
+	def set_attendance():
+		if len(scan_student.barcode.get_()) == 0: return #prevent blank ids
 
+		db_editor = db_test.Database_editor()
+		db_editor.create_open_database(config['DEFAULT']['DBFILEPATH'])
 
-		return
-
+		db_editor.set_attendance(scan_student.barcode.get_())
+		#scan_student.attendance_table.settings(add_row=)
 
 	scan_student.search_button.settings(command=lambda: fetch_student_set() if scan_student.search_type.stringvar.get() != 'Barcode' else fetch_student(scan_student.search_value.get_()))
 	scan_student.create_payment.settings(command=lambda: create_payment())
+	scan_student.check_in_button.settings(command=set_attendance)
