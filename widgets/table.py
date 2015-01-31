@@ -131,6 +131,8 @@ class Table(Widget_):
 
 			self.rows.append(row)
 			self.current_row += 1
+		if 'remove_row' in kwargs:
+			return
 		if 'sheet_limit' in kwargs:
 			self.sheet_limit = kwargs['sheet_limit']
 		if 'font' in kwargs:
